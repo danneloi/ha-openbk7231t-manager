@@ -1,0 +1,30 @@
+# This file tells Home Assistant "this GitHub repo is an add-on store".
+# It has nothing to do with the add-on itself (that's config.yaml, one
+# folder down) - it just describes the repository as a whole, and Home
+# Assistant shows these fields when you add this repo's URL under
+# Settings -> Add-ons -> Add-on Store -> (...) -> Repositories.
+#
+# All three fields below are just descriptive text - nothing here is
+# validated against your actual GitHub account, so there's no way to get
+# it "wrong". Fill in what makes sense to you; see the explanation for
+# each field below.
+
+# Required. Just a display name for the list of installed repositories in
+# Home Assistant. Can be anything - e.g. your name, or what you use this
+# repo for.
+name: "Alex's Home Assistant Add-ons"
+
+# Optional. A link shown next to the repository name in Home Assistant.
+# Once you've created the GitHub repository (Settings are usually easiest
+# from github.com -> "New repository"), this is simply that repository's
+# URL, e.g.:
+#   https://github.com/<your-github-username>/<the-repo-name-you-chose>
+# You can also just leave this pointing at nothing in particular, or
+# remove the line entirely - it's only a convenience link, never checked.
+url: "https://github.com/danneloi/ha-openbk7231t-manager"
+
+# Optional. Just contact text shown to people browsing the repository -
+# not validated or used for anything automatic. You can put your name and
+# an email you're fine making public, or remove this line entirely if you
+# don't want to list contact info at all.
+maintainer: "danneloi"

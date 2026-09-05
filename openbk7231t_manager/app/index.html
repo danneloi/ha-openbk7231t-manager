@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenBK7231T Manager</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>OpenBK7231T Manager</h1>
+    <div class="topbar-actions">
+      <select id="lang-select" class="lang-select" title="Sprache / Language">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+        <option value="en-US">English (US)</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="pt">Português</option>
+      </select>
+      <span id="release-badge" class="badge">Release: –</span>
+      <button id="btn-check-release" class="btn btn-secondary" data-i18n="checkRelease">Auf Updates prüfen</button>
+      <button id="btn-theme-toggle" class="theme-toggle" type="button" data-i18n-title="themeToggle" title="Hell/Dunkel umschalten">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="banner-update" class="banner banner-info" hidden>
+      <span id="banner-update-text"></span>
+      <button id="btn-update-all" class="btn btn-primary" data-i18n="updateAll">Alle aktualisieren</button>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2 data-i18n="devicesHeader">Geräte</h2>
+        <div class="panel-actions">
+          <button id="btn-scan" class="btn btn-secondary" data-i18n="scanNetwork">Netzwerk scannen</button>
+          <button id="btn-show-add" class="btn btn-primary" data-i18n="addDevice">Gerät hinzufügen</button>
+        </div>
+      </div>
+
+      <form id="form-add-device" class="add-device-form" hidden>
+        <input type="text" id="add-ip" data-i18n-placeholder="addIpPlaceholder" placeholder="IP-Adresse (z. B. 192.168.1.50)" required>
+        <input type="text" id="add-name" data-i18n-placeholder="addNamePlaceholder" placeholder="Name (optional)">
+        <input type="password" id="add-password" data-i18n-placeholder="addPasswordPlaceholder" placeholder="Admin-Passwort (falls gesetzt)">
+        <button type="submit" class="btn btn-primary" data-i18n="add">Hinzufügen</button>
+        <button type="button" id="btn-cancel-add" class="btn btn-link" data-i18n="cancel">Abbrechen</button>
+      </form>
+      <p id="add-device-error" class="error-text" hidden></p>
+
+      <table class="device-table">
+        <thead>
+          <tr>
+            <th data-i18n="colName">Name</th>
+            <th data-i18n="colIp">IP</th>
+            <th data-i18n="colChipset">Chipsatz</th>
+            <th data-i18n="colVersion">Version</th>
+            <th data-i18n="colStatus">Status</th>
+            <th data-i18n="colActions">Aktionen</th>
+          </tr>
+        </thead>
+        <tbody id="device-rows">
+          <tr><td colspan="6" class="empty-row" data-i18n="loadingDevices">Lade Geräte…</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="scan-panel" class="panel" hidden>
+      <div class="panel-header">
+        <h2 data-i18n="scanResultsHeader">Scan-Ergebnisse</h2>
+        <button id="btn-close-scan" class="btn btn-link" data-i18n="close">Schließen</button>
+      </div>
+      <p id="scan-status" class="muted"></p>
+      <table class="device-table">
+        <thead>
+          <tr><th data-i18n="colIp">IP</th><th data-i18n="colChipset">Chipsatz</th><th data-i18n="colVersion">Version</th><th></th></tr>
+        </thead>
+        <tbody id="scan-rows"></tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header"><h2 data-i18n="notificationsHeader">Benachrichtigungen</h2></div>
+      <p class="muted" data-i18n="notificationsIntro">
+        Lege fest, wie du benachrichtigt werden möchtest, wenn eine neue
+        OpenBK7231T_App-Firmware erscheint. Du kannst mehrere Kanäle
+        gleichzeitig einrichten. Ist kein Kanal aktiv, verwendet das Add-on
+        stattdessen eine normale Home-Assistant-Benachrichtigung.
+      </p>
+
+      <div id="channel-list"></div>
+
+      <div class="panel-actions" id="channel-type-toggle-wrap">
+        <button id="btn-show-add-channel" class="btn btn-primary" data-i18n="addChannel">Kanal hinzufügen</button>
+      </div>
+
+      <div id="new-channel-form" class="new-channel-form" hidden>
+        <p class="muted" style="margin-top:0" data-i18n="chooseChannelType">Kanaltyp auswählen:</p>
+        <div class="channel-type-picker" id="channel-type-picker"></div>
+        <div id="new-channel-fields"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header"><h2 data-i18n="settingsHeader">Einstellungen</h2></div>
+      <div id="settings-list" class="settings-list"></div>
+    </section>
+  </main>
+
+  <div id="sensor-modal-overlay" class="modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <input id="sensor-modal-name-input" class="modal-name-input" />
+          <p class="modal-subtitle" id="sensor-modal-subtitle"></p>
+        </div>
+        <button id="btn-close-sensor-modal" class="btn btn-link" data-i18n="close">Schließen</button>
+      </div>
+      <p id="sensor-modal-status" class="muted"></p>
+      <div id="sensor-categories" class="sensor-categories"></div>
+    </div>
+  </div>
+
+  <script src="static/app.js"></script>
+</body>
+</html>

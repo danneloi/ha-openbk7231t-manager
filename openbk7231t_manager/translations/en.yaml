@@ -1,0 +1,23 @@
+configuration:
+  scan_subnet:
+    name: Scan subnet
+    description: >-
+      CIDR subnet to scan for devices (e.g. 192.168.1.0/24). Leave empty to
+      auto-detect the subnet of the add-on's network interface.
+  poll_interval_minutes:
+    name: Poll interval (minutes)
+    description: How often known devices are polled for status and firmware version.
+  release_check_interval_hours:
+    name: Release check interval (hours)
+    description: How often the add-on checks GitHub for new OpenBK7231T_App releases.
+  notify_on_update:
+    name: Notify on update
+    description: Send a Home Assistant persistent notification when a new firmware release is available.
+  firmware_server_port:
+    name: Firmware server port
+    description: >-
+      Local port the add-on uses to serve firmware files to devices during an
+      OTA update. Must be reachable from your IoT devices.
+  log_level:
+    name: Log level
+    description: Verbosity of the add-on's log output.

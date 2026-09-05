@@ -1,0 +1,43 @@
+---
+name: "OpenBK7231T Manager"
+version: "1.3.1"
+slug: "openbk7231t_manager"
+description: "Findet OpenBK7231T/OpenBeken-Geräte im Netzwerk, zeigt sie in einer Liste an, aktualisiert ihre Firmware per OTA und benachrichtigt bei neuen Firmware-Releases."
+url: "https://github.com/openshwprojects/OpenBK7231T_App"
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: auto
+init: false
+host_network: true
+homeassistant_api: true
+hassio_api: true
+ingress: true
+# 0 = let the Supervisor pick a free host port at install time and hand it
+# to us at runtime via GET http://supervisor/addons/self/info. Needed
+# because this app runs with host_network: true, so a hardcoded port (the
+# commonly-used example value 8099) can collide with something else
+# already bound on the Home Assistant host itself.
+ingress_port: 0
+ingress_entry: /
+panel_icon: mdi:chip
+panel_title: "OpenBK7231T Manager"
+panel_admin: true
+map:
+  - type: data
+    read_only: false
+options:
+  scan_subnet: ""
+  poll_interval_minutes: 15
+  release_check_interval_hours: 6
+  notify_on_update: true
+  firmware_server_port: 8098
+  log_level: "info"
+schema:
+  scan_subnet: "str?"
+  poll_interval_minutes: "int(1,1440)"
+  release_check_interval_hours: "int(1,168)"
+  notify_on_update: "bool"
+  firmware_server_port: "port"
+  log_level: "list(debug|info|warning|error)"

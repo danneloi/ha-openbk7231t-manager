@@ -1,0 +1,7 @@
+build_from:
+  amd64: ghcr.io/home-assistant/amd64-base-python:3.12-alpine3.20
+  aarch64: ghcr.io/home-assistant/aarch64-base-python:3.12-alpine3.20
+labels:
+  org.opencontainers.image.title: "OpenBK7231T Manager"
+  org.opencontainers.image.description: "Geräteliste, OTA-Updates und Release-Benachrichtigungen für OpenBK7231T/OpenBeken-Geräte"
+  org.opencontainers.image.source: "https://github.com/openshwprojects/OpenBK7231T_App"
