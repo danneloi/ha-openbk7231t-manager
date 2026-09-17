@@ -8,6 +8,7 @@ import time
 from typing import Optional
 
 from flask import Flask, jsonify, request, send_from_directory, send_file
+from waitress import serve as waitress_serve
 
 import config as cfgmod
 import discovery
@@ -786,8 +787,15 @@ def asset_healthz():
 
 
 def _serve(app: Flask, port: int, name: str) -> None:
+    # Flask's own app.run() is a development-only server (it prints a
+    # "WARNING: This is a development server" banner and isn't hardened for
+    # untrusted or concurrent traffic). waitress is a small, pure-Python
+    # production WSGI server with no extra system dependencies - a drop-in
+    # replacement here since this add-on only serves a handful of local,
+    # trusted clients (the browser tab and the OpenBK7231T devices
+    # themselves fetching firmware).
     try:
-        app.run(host="0.0.0.0", port=port, threaded=True, use_reloader=False)
+        waitress_serve(app, host="0.0.0.0", port=port, threads=8)
     except OSError as exc:
         log.error(
             "Could not bind the %s server to port %s (%s). Something else on "

@@ -4,6 +4,27 @@ All notable changes to this add-on are documented here. Format loosely
 follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). More
 detailed explanations for each change are in [DOCS.md](DOCS.md) (German).
 
+## [1.3.3] - 2026-09-17
+
+### Added
+- The release badge in the top bar ("Release: x.y.z") is now clickable and
+  shows the full release notes (highlights, published date) in a popup,
+  with a link to the release on GitHub.
+- A GitHub icon in the top bar links directly to the official
+  [OpenBK7231T_App](https://github.com/openshwprojects/OpenBK7231T_App)
+  repository.
+
+## [1.3.2] - 2026-09-06
+
+### Fixed
+- The add-on's web server showed the warning "WARNING: This is a
+  development server. Do not use it in a production deployment. Use a
+  production WSGI server instead." on startup. It now uses
+  [waitress](https://github.com/Pylons/waitress), a production-ready
+  WSGI server, instead of Flask's built-in development server. This is
+  purely an internal change - nothing about how the add-on works or
+  looks changes.
+
 ## [1.3.1] - 2026-09-05
 
 ### Fixed

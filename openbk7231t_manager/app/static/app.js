@@ -41,6 +41,64 @@
       .replace(/>/g, "&gt;");
   }
 
+  // Very small, safe subset-of-Markdown renderer for GitHub release notes:
+  // everything is HTML-escaped first, then only a handful of common
+  // Markdown constructs (headings, bold/italic, inline code, links, bullet
+  // lists, paragraphs) are turned into HTML - good enough for release notes
+  // without pulling in a full Markdown library.
+  function renderMarkdownLite(md) {
+    if (!md) return "";
+    const lines = escapeHtml(md).replace(/\r\n?/g, "\n").split("\n");
+    const htmlParts = [];
+    let listOpen = false;
+    let paraLines = [];
+
+    function inline(s) {
+      return s
+        .replace(/`([^`]+)`/g, "<code>$1</code>")
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+        .replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, "$1<em>$2</em>")
+        .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    }
+    function flushPara() {
+      if (paraLines.length) {
+        htmlParts.push(`<p>${inline(paraLines.join(" "))}</p>`);
+        paraLines = [];
+      }
+    }
+    function closeList() {
+      if (listOpen) {
+        htmlParts.push("</ul>");
+        listOpen = false;
+      }
+    }
+
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
+      const heading = line.match(/^(#{1,6})\s+(.*)$/);
+      const bullet = line.match(/^[-*]\s+(.*)$/);
+      if (!line) {
+        flushPara();
+        closeList();
+      } else if (heading) {
+        flushPara();
+        closeList();
+        const tag = heading[1].length <= 2 ? "h3" : "h4";
+        htmlParts.push(`<${tag}>${inline(heading[2])}</${tag}>`);
+      } else if (bullet) {
+        flushPara();
+        if (!listOpen) { htmlParts.push("<ul>"); listOpen = true; }
+        htmlParts.push(`<li>${inline(bullet[1])}</li>`);
+      } else {
+        closeList();
+        paraLines.push(line);
+      }
+    }
+    flushPara();
+    closeList();
+    return htmlParts.join("");
+  }
+
   // --- Internationalization ---------------------------------------------
   //
   // A lightweight dictionary-based i18n layer. Static markup is translated
@@ -166,6 +224,11 @@
       releaseNotChecked: "Release: noch nicht geprüft",
       releaseLabel: "Release: {tag}",
       lastChecked: "Zuletzt geprüft: {date}",
+      viewReleaseNotes: "Release-Notes anzeigen",
+      releasePublished: "Veröffentlicht: {date}",
+      releaseNoNotes: "Keine Release-Notes vorhanden.",
+      viewOnGithub: "Auf GitHub ansehen",
+      githubRepoTitle: "OpenBK7231T_App auf GitHub öffnen",
       notifActive: "aktiv",
       notifInactive: "inaktiv",
       notifSave: "Speichern",
@@ -302,6 +365,11 @@
       releaseNotChecked: "Release: not checked yet",
       releaseLabel: "Release: {tag}",
       lastChecked: "Last checked: {date}",
+      viewReleaseNotes: "View release notes",
+      releasePublished: "Published: {date}",
+      releaseNoNotes: "No release notes available.",
+      viewOnGithub: "View on GitHub",
+      githubRepoTitle: "Open OpenBK7231T_App on GitHub",
       notifActive: "active",
       notifInactive: "inactive",
       notifSave: "Save",
@@ -438,6 +506,11 @@
       releaseNotChecked: "Release : pas encore vérifiée",
       releaseLabel: "Release : {tag}",
       lastChecked: "Dernière vérification : {date}",
+      viewReleaseNotes: "Voir les notes de version",
+      releasePublished: "Publiée le : {date}",
+      releaseNoNotes: "Aucune note de version disponible.",
+      viewOnGithub: "Voir sur GitHub",
+      githubRepoTitle: "Ouvrir OpenBK7231T_App sur GitHub",
       notifActive: "actif",
       notifInactive: "inactif",
       notifSave: "Enregistrer",
@@ -574,6 +647,11 @@
       releaseNotChecked: "Release: aún no comprobada",
       releaseLabel: "Release: {tag}",
       lastChecked: "Última comprobación: {date}",
+      viewReleaseNotes: "Ver notas de la versión",
+      releasePublished: "Publicada: {date}",
+      releaseNoNotes: "No hay notas de la versión disponibles.",
+      viewOnGithub: "Ver en GitHub",
+      githubRepoTitle: "Abrir OpenBK7231T_App en GitHub",
       notifActive: "activo",
       notifInactive: "inactivo",
       notifSave: "Guardar",
@@ -710,6 +788,11 @@
       releaseNotChecked: "Release: ainda não verificada",
       releaseLabel: "Release: {tag}",
       lastChecked: "Última verificação: {date}",
+      viewReleaseNotes: "Ver notas da versão",
+      releasePublished: "Publicada: {date}",
+      releaseNoNotes: "Não há notas de versão disponíveis.",
+      viewOnGithub: "Ver no GitHub",
+      githubRepoTitle: "Abrir o OpenBK7231T_App no GitHub",
       notifActive: "ativo",
       notifInactive: "inativo",
       notifSave: "Guardar",
@@ -943,6 +1026,8 @@
   }
 
   let lastDevices = [];
+  let lastReleaseData = null;
+  let lastReleaseChecked = null;
 
   function updateBanner(devices) {
     const outdated = devices.filter((d) => d.update_available);
@@ -969,6 +1054,8 @@
 
   async function loadRelease() {
     const data = await api("GET", "api/release");
+    lastReleaseData = data.release || null;
+    lastReleaseChecked = data.last_checked || null;
     if (data.release) {
       releaseBadge.textContent = t("releaseLabel", { tag: data.release.tag_name });
       releaseBadge.title = t("lastChecked", { date: fmtDate(data.last_checked) });
@@ -1252,6 +1339,45 @@
   });
   document.addEventListener("keydown", (ev) => {
     if (ev.key === "Escape" && !sensorModalOverlay.hidden) closeSensorModal();
+  });
+
+  // --- Release notes modal ------------------------------------------------
+
+  const releaseModalOverlay = $("#release-modal-overlay");
+  const releaseModalTitle = $("#release-modal-title");
+  const releaseModalSubtitle = $("#release-modal-subtitle");
+  const releaseModalBody = $("#release-modal-body");
+  const releaseModalLink = $("#release-modal-link");
+
+  function openReleaseModal() {
+    if (!lastReleaseData) return;
+    releaseModalTitle.textContent = lastReleaseData.name || t("releaseLabel", { tag: lastReleaseData.tag_name });
+    const parts = [];
+    if (lastReleaseData.published_at) {
+      parts.push(t("releasePublished", { date: new Date(lastReleaseData.published_at).toLocaleString(DATE_LOCALES[getLang()] || "de-DE") }));
+    }
+    if (lastReleaseChecked) {
+      parts.push(t("lastChecked", { date: fmtDate(lastReleaseChecked) }));
+    }
+    releaseModalSubtitle.textContent = parts.join(" · ");
+    releaseModalBody.innerHTML = lastReleaseData.body
+      ? renderMarkdownLite(lastReleaseData.body)
+      : `<p class="muted">${escapeHtml(t("releaseNoNotes"))}</p>`;
+    releaseModalLink.href = lastReleaseData.html_url || "https://github.com/openshwprojects/OpenBK7231T_App/releases";
+    releaseModalOverlay.hidden = false;
+  }
+
+  function closeReleaseModal() {
+    releaseModalOverlay.hidden = true;
+  }
+
+  releaseBadge.addEventListener("click", openReleaseModal);
+  $("#btn-close-release-modal").addEventListener("click", closeReleaseModal);
+  releaseModalOverlay.addEventListener("click", (ev) => {
+    if (ev.target === releaseModalOverlay) closeReleaseModal();
+  });
+  document.addEventListener("keydown", (ev) => {
+    if (ev.key === "Escape" && !releaseModalOverlay.hidden) closeReleaseModal();
   });
 
   // Renaming the device now happens inside the popup (the table only shows

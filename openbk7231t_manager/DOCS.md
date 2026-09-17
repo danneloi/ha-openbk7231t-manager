@@ -2,6 +2,31 @@
 
 > Eine kompakte Versionsübersicht gibt es auch in [CHANGELOG.md](CHANGELOG.md).
 
+## Änderungen in 1.3.3
+
+- **Release-Notes per Klick**: Ein Klick auf die Release-Anzeige oben
+  ("Release: x.y.z") öffnet jetzt ein Popup mit den vollständigen
+  Release-Notes des neuesten OpenBK7231T_App-Releases (Highlights,
+  Veröffentlichungsdatum) sowie einem Link zum Release auf GitHub.
+- **GitHub-Symbol in der Kopfzeile**: Oben links neben der Sprachauswahl
+  öffnet ein neues GitHub-Symbol direkt das offizielle
+  [OpenBK7231T_App](https://github.com/openshwprojects/OpenBK7231T_App)-Repository
+  in einem neuen Tab.
+
+## Änderungen in 1.3.2
+
+- **Warnung "This is a development server" behoben**: Beim Start meldete
+  das Add-on bisher im Log die Flask-Warnung "WARNING: This is a
+  development server. Do not use it in a production deployment. Use a
+  production WSGI server instead." Das lag daran, dass die Weboberfläche
+  intern über Flasks eingebauten Entwicklungsserver lief - der ist für
+  den Dauerbetrieb nicht gedacht (nicht auf Stabilität/Nebenläufigkeit
+  unter Last ausgelegt), auch wenn er im Alltag meist trotzdem
+  funktioniert hat. Das Add-on nutzt jetzt stattdessen
+  [waitress](https://github.com/Pylons/waitress), einen für den
+  Dauerbetrieb gedachten WSGI-Server. Für dich ändert sich dadurch nichts
+  an der Bedienung - nur die Warnung verschwindet.
+
 ## Änderungen in 1.3.1
 
 - **Benachrichtigungen jetzt vollständig übersetzt**: Beim Umschalten der
@@ -9,7 +34,7 @@
   Hinweistexte, Platzhaltertexte) bisher auf Deutsch. Jetzt wird er
   konsistent in die gewählte Sprache übersetzt.
 - **Beispielname im Kanal-Formular anonymisiert**: Das Feld "Name" zeigte
-  als Beispiel "z. B. Handy" – jetzt ein neutrales Beispiel ("z. B.
+  als Beispiel "z. B. Handy Daniel" – jetzt ein neutrales Beispiel ("z. B.
   Handy Alex").
 - **Repository jetzt GitHub-fertig**: `repository.yaml`, ein Root-`README.md`,
   `CHANGELOG.md`, ein Add-on-Icon/-Logo sowie ein paar Vorschau-Screenshots
@@ -59,8 +84,8 @@
   sollte. Bei der Fehlersuche für ein Gerät mit RTL87X0C-Chip hat sich
   per Netzwerk-Mitschnitt (tcpdump) gezeigt, dass die URL-Verarbeitung
   dieses Befehls auf mindestens dieser Chip-Familie einen echten
-  Firmware-Bug hat: Aus einer korrekten IP wie `192.168.1.50` wurde
-  intern fälschlich `192.168.1.42` (die dritte Zifferngruppe wurde in
+  Firmware-Bug hat: Aus einer korrekten IP wie `192.168.42.50` wurde
+  intern fälschlich `192.168.42.42` (die dritte Zifferngruppe wurde in
   die letzte hineinkopiert, die eigentliche letzte Zifferngruppe ging
   dabei verloren) – das Gerät hat also nie beim richtigen Absender
   angefragt, ganz unabhängig davon, ob unser Add-on oder sonst irgendetwas
