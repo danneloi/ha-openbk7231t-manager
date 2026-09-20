@@ -2,6 +2,67 @@
 
 > Eine kompakte Versionsübersicht gibt es auch in [CHANGELOG.md](CHANGELOG.md).
 
+## Änderungen in 1.4.1
+
+- **"Zurück"-Link auf der Migrations-Seite behoben**: Der Pfeil "←" oben
+  auf der neuen Seite "ESPHome ↔ OpenBeken" führte bisher zu einer
+  Fehlermeldung ("Not Found"), weil die Hauptseite intern nur unter `/`
+  erreichbar war, nicht unter `/index.html`. Der Link zeigt jetzt korrekt
+  auf `/`; zusätzlich funktioniert `/index.html` jetzt ebenfalls als
+  Alias, falls irgendwo sonst noch darauf verlinkt wird.
+- **Mobile Ansicht überarbeitet**: Kopfzeile, Formulare, Buttons, Tabellen,
+  Dialoge (z. B. die Sensordetail-Ansicht) und die Einstellungsübersicht
+  passen sich jetzt an schmale Bildschirme (Smartphone) an, statt
+  abgeschnitten zu werden oder die ganze Seite seitlich verschieben zu
+  lassen. Nur einzelne, weiterhin zu breite Tabellen scrollen bei Bedarf
+  für sich alleine horizontal.
+
+## Änderungen in 1.4.0
+
+- **Neue Seite "ESPHome ↔ OpenBeken"**: Über einen neuen Button oben in der
+  Kopfzeile (direkt neben der Sprachauswahl, mit der Aufschrift
+  "ESPHome ↔ OpenBeken") öffnet sich eine eigene, separate Seite für den
+  Umstieg eines Geräts, das ursprünglich mit ESPHome geflasht wurde, auf
+  OpenBK7231T_App ("OpenBeken") – komplett über das Netzwerk, ganz ohne
+  UART/Chip-Programmer. Die Seite ist bewusst getrennt von der normalen
+  Geräteliste gehalten und besteht aus drei Bereichen:
+  - **UF2-Datei erzeugen**: Du wählst aus einer Liste den passenden Chip
+    bzw. das passende Modul aus (z. B. "Generic BK7231N QFN32 (Tuya)"),
+    das Add-on lädt daraufhin automatisch die zum aktuellen
+    OpenBK7231T_App-Release passende Firmware-Datei herunter und wandelt
+    sie mit [ltchiptool](https://github.com/libretiny-eu/ltchiptool) (dem
+    Tool des LibreTiny-Projekts) in eine `.uf2`-Datei um. Diese Datei lädst
+    du anschließend selbst über die eigene Update-Seite von ESPHome hoch
+    (Gerät im ESPHome-Dashboard öffnen → "Update" bzw. die
+    `/update`-Weboberfläche, sofern in der ESPHome-YAML ein `web_server:`
+    eingerichtet ist). Eine Schritt-für-Schritt-Anleitung dazu wird direkt
+    auf der Seite angezeigt, sobald die Datei fertig ist.
+  - **ESPHome-YAML einlesen**: Du lädst deine bestehende ESPHome-YAML-Datei
+    hoch. Das Add-on erkennt darin automatisch einfache GPIO-Zuweisungen
+    (`switch`, `binary_sensor`, sowie `light`/`output`-Kombinationen für
+    LEDs) und übersetzt sie in die passenden OpenBeken-Konsolenbefehle
+    (`setPinRole`/`setPinChannel`). Die erkannten Pins werden in einer
+    Tabelle angezeigt, unklare oder nicht automatisch übersetzbare Fälle
+    (z. B. Ausgänge, die von keinem Licht verwendet werden, oder mehrere
+    Farbkanäle an einem Licht) werden als Warnung aufgelistet, damit du sie
+    von Hand nachprüfen kannst. Die erzeugten Befehle lassen sich bequem
+    per Knopfdruck in die Zwischenablage kopieren.
+  - **Befehle ans Gerät senden**: Nachdem das Gerät mit der neuen UF2-Datei
+    geflasht wurde und im Netzwerk erreichbar ist, kannst du die zuvor
+    erzeugten (oder von Hand angepassten) Befehle direkt über die IP-Adresse
+    des Geräts anwenden lassen, ohne sie manuell in die Geräte-Konsole
+    eintippen zu müssen.
+  - **Wichtiger Hinweis**: Ein auffälliger Warnhinweis oben auf der Seite
+    macht deutlich, dass die Wahl des richtigen Chips/Boards von Hand
+    erfolgen muss - eine falsche Auswahl kann dazu führen, dass das Gerät
+    danach nicht mehr per OTA ansprechbar ist (dann hilft nur noch ein
+    Zurückflashen per UART). Das Add-on flasht dabei nie selbstständig ein
+    Gerät - es erzeugt nur die UF2-Datei bzw. sendet auf ausdrücklichen
+    Wunsch Konfigurationsbefehle an eine von dir angegebene IP-Adresse.
+  - Unterstützt werden alle Chip-Familien, die ltchiptool kennt und die es
+    auch als eigenständiges OpenBeken-Firmware-Image gibt: BK7231T/N,
+    BK7238, BK7252, LN882H, RTL8710B sowie RTL8720C/RTL87X0C.
+
 ## Änderungen in 1.3.3
 
 - **Release-Notes per Klick**: Ein Klick auf die Release-Anzeige oben

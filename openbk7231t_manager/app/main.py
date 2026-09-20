@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 import sys
 import threading
 import time
@@ -14,6 +15,7 @@ import config as cfgmod
 import discovery
 import github_release
 import ha_notify
+import migrate_esphome
 import notifiers
 import obk_client
 import store as storemod
@@ -53,6 +55,7 @@ device_store = storemod.DeviceStore(settings.data_dir)
 app_state = storemod.AppState(settings.data_dir)
 notification_store = storemod.NotificationStore(settings.data_dir)
 FIRMWARE_CACHE_DIR = os.path.join(settings.data_dir, "firmware")
+MIGRATE_UF2_CACHE_DIR = os.path.join(settings.data_dir, "migrate_uf2")
 
 UPDATE_POLL_INTERVAL_S = 5
 UPDATE_TIMEOUT_S = 240  # give a device up to 4 minutes to come back after OTA
@@ -477,8 +480,14 @@ ui_app = Flask(__name__, static_folder=os.path.join(APP_DIR, "static"))
 
 
 @ui_app.get("/")
+@ui_app.get("/index.html")
 def index():
     return send_from_directory(APP_DIR, "index.html")
+
+
+@ui_app.get("/migrate.html")
+def migrate_page():
+    return send_from_directory(APP_DIR, "migrate.html")
 
 
 @ui_app.get("/api/devices")
@@ -642,6 +651,114 @@ def api_release_check():
         log.exception("Manual release check failed")
         return jsonify({"error": str(exc)}), 502
     return jsonify(release.to_dict())
+
+
+@ui_app.get("/api/migrate/boards")
+def api_migrate_boards():
+    return jsonify(migrate_esphome.list_boards())
+
+
+@ui_app.post("/api/migrate/uf2")
+def api_migrate_build_uf2():
+    body = request.get_json(force=True, silent=True) or {}
+    board_name = (body.get("board") or "").strip()
+    board = migrate_esphome.find_board(board_name)
+    if not board:
+        return jsonify({"error": f"Unbekanntes Board '{board_name}'."}), 400
+
+    release = _current_release()
+    if not release:
+        return jsonify({"error": "Noch keine Release-Informationen vorhanden. Bitte zuerst auf Releases prüfen."}), 400
+
+    chipset = board["chipset"]
+    filename = github_release.ota_asset_filename(chipset, release.tag_name)
+    if not filename:
+        return jsonify({"error": f"Kein OpenBeken-OTA-Image für Chipsatz '{chipset}' in Release {release.tag_name} verfügbar."}), 400
+
+    try:
+        firmware_path = github_release.ensure_firmware_cached(release, chipset, FIRMWARE_CACHE_DIR)
+    except Exception as exc:  # noqa: BLE001
+        log.exception("Firmware download for migration failed")
+        return jsonify({"error": f"Download der Firmware fehlgeschlagen: {exc}"}), 502
+
+    fw_name = filename.rsplit("_", 1)[0]
+    uf2_dir = os.path.join(MIGRATE_UF2_CACHE_DIR, board["name"])
+    uf2_filename = f"{fw_name}_{release.tag_name}.uf2"
+    uf2_path = os.path.join(uf2_dir, uf2_filename)
+
+    if not os.path.exists(uf2_path):
+        try:
+            migrate_esphome.build_uf2(board["name"], firmware_path, fw_name, release.tag_name, uf2_path)
+        except migrate_esphome.UF2BuildError as exc:
+            log.exception("UF2 build failed")
+            return jsonify({"error": f"UF2-Erstellung fehlgeschlagen: {exc}"}), 502
+
+    return jsonify({
+        "ok": True,
+        "board": board["name"],
+        "chipset": chipset,
+        "fw_name": fw_name,
+        "fw_version": release.tag_name,
+        "filename": uf2_filename,
+        "download_url": f"api/migrate/uf2-file/{board['name']}/{release.tag_name}",
+    })
+
+
+_SAFE_TAG_RE = re.compile(r"^[A-Za-z0-9_.\-]+$")
+
+
+@ui_app.get("/api/migrate/uf2-file/<board_name>/<version>")
+def api_migrate_uf2_file(board_name, version):
+    # board_name/version both end up in a filesystem path below, so only
+    # ever accept values that came from our own list_boards()/release info -
+    # this whitelist check also doubles as path-traversal protection.
+    board = migrate_esphome.find_board(board_name)
+    if not board or not _SAFE_TAG_RE.match(version):
+        return jsonify({"error": "Unbekanntes Board oder ungültige Version."}), 404
+    uf2_dir = os.path.join(MIGRATE_UF2_CACHE_DIR, board["name"])
+    matches = [f for f in os.listdir(uf2_dir) if f.endswith(f"_{version}.uf2")] if os.path.isdir(uf2_dir) else []
+    if not matches:
+        return jsonify({"error": "Datei nicht gefunden - bitte zuerst erzeugen."}), 404
+    return send_from_directory(uf2_dir, matches[0], as_attachment=True, download_name=matches[0])
+
+
+@ui_app.post("/api/migrate/parse-yaml")
+def api_migrate_parse_yaml():
+    file = request.files.get("file")
+    if not file:
+        return jsonify({"error": "Keine Datei hochgeladen."}), 400
+    raw = file.read(1_000_000)  # 1 MB is far more than any real ESPHome YAML needs
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError:
+        return jsonify({"error": "Datei ist keine gültige UTF-8-Textdatei."}), 400
+    result = migrate_esphome.translate_esphome_yaml(text)
+    return jsonify({
+        "pins": [
+            {"pin": p.pin, "role": p.role, "channel": p.channel, "source": p.source}
+            for p in result.pins
+        ],
+        "commands": result.commands,
+        "warnings": result.warnings,
+    })
+
+
+@ui_app.post("/api/migrate/apply-config")
+def api_migrate_apply_config():
+    body = request.get_json(force=True, silent=True) or {}
+    ip = (body.get("ip") or "").strip()
+    if not ip:
+        return jsonify({"error": "IP-Adresse fehlt"}), 400
+    password = body.get("password") or None
+    commands = body.get("commands") or []
+    if not isinstance(commands, list) or not commands:
+        return jsonify({"error": "Keine Befehle übergeben."}), 400
+
+    results = []
+    for command in commands:
+        outcome = obk_client.send_command_cm(ip, str(command), password=password)
+        results.append({"command": command, "ok": outcome["ok"], "error": outcome.get("error")})
+    return jsonify({"results": results})
 
 
 @ui_app.get("/api/scan")

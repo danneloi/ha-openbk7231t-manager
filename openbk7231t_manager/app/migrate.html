@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenBK7231T Manager - ESPHome-Migration</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1><a id="back-link" href="./" class="back-link" data-i18n-title="backToDevices" title="Zurück zur Geräteliste">←</a> <span data-i18n="migrateTitle">ESPHome ↔ OpenBeken Migration</span></h1>
+    <div class="topbar-actions">
+      <select id="lang-select" class="lang-select" title="Sprache / Language">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+        <option value="en-US">English (US)</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="pt">Português</option>
+      </select>
+      <button id="btn-theme-toggle" class="theme-toggle" type="button" data-i18n-title="themeToggle" title="Hell/Dunkel umschalten">🌙</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="banner-warning" class="banner banner-warning">
+      <span data-i18n="migrateWarning">
+        Experimentelle Funktion. Wähle den Chip/das Board sorgfältig - eine
+        falsche Auswahl kann das Gerät unbrauchbar machen. Halte für den
+        Ernstfall einen UART-Wiederherstellungsweg bereit. Diese Seite
+        schickt niemals selbstständig Firmware an ein Gerät: das UF2 lädst
+        du hier nur herunter und spielst es manuell über ESPHomes eigene
+        OTA-Funktion auf; dafür muss in der Geräte-YAML bereits
+        "ota: platform: web_server" (bzw. "web_server:") eingerichtet sein
+        - falls nicht, musst du das Gerät zuerst einmal ganz normal per
+        ESPHome aktualisieren, um diese Funktion zu ergänzen.
+      </span>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2 data-i18n="uf2Header">1. OpenBeken-Firmware als UF2 erzeugen</h2>
+      </div>
+      <p class="muted" data-i18n="uf2Intro">
+        Wähle den Chip bzw. das Modul deines ESPHome-Geräts. Das Add-on lädt
+        die passende OpenBeken-Firmware des aktuellen Release herunter und
+        verpackt sie als UF2-Datei, die du anschließend über ESPHomes
+        eigene Update-Oberfläche manuell hochlädst.
+      </p>
+      <div class="add-device-form">
+        <select id="board-select"></select>
+        <button id="btn-build-uf2" class="btn btn-primary" data-i18n="uf2Build">UF2 erzeugen</button>
+      </div>
+      <p id="uf2-status" class="muted"></p>
+      <div id="uf2-result" hidden>
+        <p><a id="uf2-download-link" class="btn btn-secondary" href="#" data-i18n="uf2Download">UF2 herunterladen</a></p>
+        <ol class="instructions-list" data-i18n-html="uf2Instructions"></ol>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2 data-i18n="yamlHeader">2. ESPHome-YAML einlesen</h2>
+      </div>
+      <p class="muted" data-i18n="yamlIntro">
+        Lade die YAML-Konfiguration, mit der dieses Gerät aktuell unter
+        ESPHome läuft, hoch. Die Seite erkennt gpio-basierte Relais,
+        Taster und Lichter/Ausgänge und übersetzt sie in die entsprechenden
+        OpenBeken-Befehle.
+      </p>
+      <div class="add-device-form">
+        <input type="file" id="yaml-file" accept=".yaml,.yml,text/yaml">
+        <button id="btn-parse-yaml" class="btn btn-primary" data-i18n="yamlAnalyze">Analysieren</button>
+      </div>
+      <p id="yaml-status" class="muted"></p>
+
+      <div id="yaml-result" hidden>
+        <div class="table-scroll">
+          <table class="device-table">
+            <thead>
+              <tr>
+                <th data-i18n="colPin">Pin</th>
+                <th data-i18n="colRole">Rolle</th>
+                <th data-i18n="colChannel">Kanal</th>
+                <th data-i18n="colSource">Quelle</th>
+              </tr>
+            </thead>
+            <tbody id="pin-rows"></tbody>
+          </table>
+        </div>
+
+        <p id="yaml-warnings-title" class="muted" hidden data-i18n="yamlWarningsTitle">Nicht automatisch übersetzt:</p>
+        <ul id="yaml-warnings"></ul>
+
+        <p data-i18n="yamlCommandsLabel">Generierte Befehle (bei Bedarf vor dem Senden anpassen):</p>
+        <textarea id="commands-textarea" class="commands-textarea" rows="6"></textarea>
+        <div class="panel-actions">
+          <button id="btn-copy-commands" class="btn btn-secondary" data-i18n="copyToClipboard">In Zwischenablage kopieren</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2 data-i18n="applyHeader">3. Konfiguration an frisch geflashtes Gerät senden</h2>
+      </div>
+      <p class="muted" data-i18n="applyIntro">
+        Sobald das Gerät mit OpenBeken läuft und im Netzwerk erreichbar
+        ist, kannst du die oben generierten (oder von Hand angepassten)
+        Befehle direkt an seine IP-Adresse senden.
+      </p>
+      <div class="add-device-form">
+        <input type="text" id="apply-ip" data-i18n-placeholder="applyIpPlaceholder" placeholder="IP-Adresse (z. B. 192.168.1.50)">
+        <input type="password" id="apply-password" data-i18n-placeholder="applyPasswordPlaceholder" placeholder="Admin-Passwort (falls gesetzt)">
+        <button id="btn-apply-config" class="btn btn-primary" data-i18n="applySend">Senden</button>
+      </div>
+      <ul id="apply-results"></ul>
+    </section>
+  </main>
+
+  <script src="static/migrate.js"></script>
+</body>
+</html>

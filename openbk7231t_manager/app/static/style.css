@@ -98,6 +98,8 @@ body {
 }
 
 .topbar h1 { font-size: 1.25rem; margin: 0; }
+.back-link { color: var(--text); text-decoration: none; margin-right: 4px; }
+.back-link:hover { text-decoration: underline; }
 .topbar-actions { display: flex; align-items: center; gap: 12px; }
 
 .theme-toggle {
@@ -155,6 +157,7 @@ main { padding: 16px 20px 40px; max-width: 1100px; margin: 0 auto; }
   cursor: pointer;
   font-family: inherit;
 }
+a.btn { text-decoration: none; display: inline-flex; align-items: center; }
 .btn-primary { background: var(--primary); color: white; }
 .btn-primary:hover { background: var(--primary-dark); }
 .btn-secondary { background: var(--secondary-bg); color: var(--text); }
@@ -189,6 +192,7 @@ main { padding: 16px 20px 40px; max-width: 1100px; margin: 0 auto; }
   gap: 12px;
 }
 .banner-info { background: var(--info-bg); color: var(--info-text); }
+.banner-warning { background: var(--warning-bg); color: var(--warning); line-height: 1.5; }
 /* Author rules setting display:flex on .banner would otherwise win over the
    browser's built-in "[hidden] { display: none }" rule even though the
    selector specificity is tied, because author stylesheets take priority
@@ -218,6 +222,7 @@ main { padding: 16px 20px 40px; max-width: 1100px; margin: 0 auto; }
 .error-text { color: var(--danger); font-size: 0.9rem; }
 .muted { color: var(--muted); font-size: 0.9rem; }
 
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .device-table { width: 100%; border-collapse: collapse; }
 .device-table th, .device-table td {
   text-align: left;
@@ -360,6 +365,26 @@ input, select, textarea {
 }
 .release-notes a { color: var(--primary); }
 
+/* --- ESPHome migration page --------------------------------------------- */
+
+.instructions-list { margin: 8px 0 0; padding-left: 22px; font-size: 0.9rem; line-height: 1.6; }
+.instructions-list li { margin: 4px 0; }
+.commands-textarea {
+  width: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  padding: 10px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+#yaml-warnings, #apply-results {
+  padding-left: 20px;
+  font-size: 0.9rem;
+  margin: 8px 0 16px;
+}
+#apply-results li.ok { color: var(--success); }
+#apply-results li.fail { color: var(--danger); }
+
 .sensor-category { margin-bottom: 18px; }
 .sensor-category:last-child { margin-bottom: 0; }
 .sensor-category-title {
@@ -472,3 +497,53 @@ input, select, textarea {
 .test-result { font-size: 0.85rem; margin-top: 6px; }
 .test-result.ok { color: var(--success); }
 .test-result.fail { color: var(--danger); }
+
+/* --- Mobile / small-screen layout -------------------------------------- */
+
+@media (max-width: 640px) {
+  .topbar {
+    flex-wrap: wrap;
+    row-gap: 10px;
+    padding: 12px 14px;
+  }
+  .topbar h1 {
+    font-size: 1.05rem;
+    flex: 1 1 100%;
+    white-space: normal;
+  }
+  .topbar-actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  .topbar-actions .lang-select { flex: 1 1 auto; }
+  .topbar-actions #btn-check-release,
+  .topbar-actions #btn-migrate { flex: 1 1 auto; text-align: center; }
+
+  main { padding: 12px 12px 32px; }
+
+  .panel { padding: 12px 14px; }
+  .panel-header { flex-direction: column; align-items: stretch; }
+  .panel-actions { width: 100%; }
+  .panel-actions .btn { flex: 1 1 auto; }
+
+  .add-device-form { flex-direction: column; }
+  .add-device-form input,
+  .add-device-form select,
+  .add-device-form button { width: 100%; flex: 1 1 auto; }
+
+  .device-table { font-size: 0.85rem; }
+  .device-table th, .device-table td { padding: 8px 6px; white-space: nowrap; }
+
+  .settings-list { flex-direction: column; gap: 10px; }
+
+  .modal-overlay { padding: 10px; }
+  .modal { padding: 16px; max-height: 92vh; }
+
+  .channel-type-picker { justify-content: space-between; }
+  .channel-type-btn { flex: 1 1 28%; padding: 10px 6px; font-size: 0.75rem; }
+  .channel-type-btn svg { width: 22px; height: 22px; }
+
+  .row-actions { justify-content: flex-start; }
+}

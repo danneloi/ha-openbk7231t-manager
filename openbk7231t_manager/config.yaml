@@ -1,6 +1,6 @@
 ---
 name: "OpenBK7231T Manager"
-version: "1.3.3"
+version: "1.4.1"
 slug: "openbk7231t_manager"
 description: "Findet OpenBK7231T/OpenBeken-Geräte im Netzwerk, zeigt sie in einer Liste an, aktualisiert ihre Firmware per OTA und benachrichtigt bei neuen Firmware-Releases."
 url: "https://github.com/openshwprojects/OpenBK7231T_App"

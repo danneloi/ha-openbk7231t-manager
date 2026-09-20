@@ -4,6 +4,41 @@ All notable changes to this add-on are documented here. Format loosely
 follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). More
 detailed explanations for each change are in [DOCS.md](DOCS.md) (German).
 
+## [1.4.1] - 2026-09-20
+
+### Fixed
+- The "←" back link on the new "ESPHome ↔ OpenBeken" page led to a "Not
+  Found" error, because the main page is only served at `/` and not at
+  `/index.html`. The link now points to `/` (and `/index.html` also works
+  now as an alias, as a safety net).
+
+### Added
+- Mobile-friendly layout: the top bar, forms, buttons, tables, dialogs and
+  the settings list now adapt to narrow (phone-sized) screens instead of
+  overflowing or requiring horizontal scrolling of the whole page. Tables
+  that are still wider than the screen scroll horizontally on their own,
+  without taking the rest of the page with them.
+
+## [1.4.0] - 2026-09-20
+
+### Added
+- New "ESPHome ↔ OpenBeken" page (linked from the top bar), for migrating a
+  device that was originally flashed with ESPHome over to OpenBK7231T_App
+  and back, entirely over the network:
+  - Build a ready-to-flash `.uf2` firmware package for a chosen chip/module
+    from the current OpenBeken release (using
+    [ltchiptool](https://github.com/libretiny-eu/ltchiptool)), to upload
+    manually through ESPHome's own OTA update page.
+  - Upload an existing ESPHome YAML config to auto-detect its gpio-based
+    switches, buttons and lights, and translate them into the matching
+    OpenBeken `setPinRole`/`setPinChannel` console commands.
+  - Send the generated (or hand-edited) commands directly to a freshly
+    flashed device's IP address.
+  - This only supports the LibreTiny-based chips ltchiptool knows how to
+    package for (BK7231T/N, BK7238, BK7252, LN882H, RTL8710B, RTL8720C/
+    RTL87X0C) - the page never flashes a device on its own, and the exact
+    chip/board always has to be picked by hand to avoid guessing wrong.
+
 ## [1.3.3] - 2026-09-17
 
 ### Added
