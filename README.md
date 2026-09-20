@@ -3,8 +3,9 @@
 This repository contains the **OpenBK7231T Manager** add-on for Home
 Assistant. It finds [OpenBK7231T_App](https://github.com/openshwprojects/OpenBK7231T_App)/OpenBeken
 devices on your local network, shows their live sensor data, updates their
-firmware over the air, and notifies you about new firmware releases — all
-locally, with no cloud service or MQTT required.
+firmware over the air, notifies you about new firmware releases, and helps
+you migrate a device from ESPHome to OpenBeken (and back) — all locally,
+with no cloud service or MQTT required, and with a mobile-friendly UI.
 
 ![Device list](openbk7231t_manager/screenshots/screenshot-devices-en.png)
 
