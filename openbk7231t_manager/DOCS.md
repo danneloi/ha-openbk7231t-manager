@@ -2,6 +2,22 @@
 
 > Eine kompakte Versionsübersicht gibt es auch in [CHANGELOG.md](CHANGELOG.md).
 
+## Änderungen in 1.5.0
+
+- **Neuer Bereich "Firmware-Cache"** auf der Hauptseite: Heruntergeladene
+  OpenBeken-Firmware-Images und über "ESPHome ↔ OpenBeken" erzeugte
+  UF2-Dateien wurden bisher nie automatisch gelöscht und konnten sich mit
+  der Zeit ansammeln. Jetzt siehst du dort:
+  - eine Liste aller zwischengespeicherten Dateien (Typ, Bezeichnung,
+    Dateiname, Größe, Hinzugefügt-Datum) sowie die insgesamt belegte
+    Größe,
+  - kannst einzelne Dateien per Klick löschen,
+  - kannst eine maximale Cache-Größe (in MB) festlegen, ab der automatisch
+    aufgeräumt wird - dabei wird immer zuerst die älteste Datei gelöscht,
+    nie die zuletzt heruntergeladene/erzeugte,
+  - und kannst das Aufräumen jederzeit auch manuell über "Jetzt aufräumen"
+    anstoßen, unabhängig vom eingestellten Limit.
+
 ## Änderungen in 1.4.1
 
 - **"Zurück"-Link auf der Migrations-Seite behoben**: Der Pfeil "←" oben

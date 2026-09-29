@@ -4,6 +4,22 @@ All notable changes to this add-on are documented here. Format loosely
 follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). More
 detailed explanations for each change are in [DOCS.md](DOCS.md) (German).
 
+## [1.5.0] - 2026-09-28
+
+### Added
+- New "Firmware cache" panel on the main page for managing the OpenBeken
+  firmware images and UF2 packages downloaded/built for OTA updates and
+  the "ESPHome ↔ OpenBeken" migration page. These were never deleted
+  automatically before and could accumulate over time. Now you can:
+  - See every cached file (type, label, filename, size, date added) and
+    the total size used.
+  - Delete individual files by hand.
+  - Set a maximum cache size (in MB) with automatic cleanup once it's
+    exceeded - the oldest cached files are always removed first, never
+    the most recently downloaded/built ones.
+  - Trigger a cleanup manually at any time ("Clean up now"), independent
+    of the automatic limit.
+
 ## [1.4.1] - 2026-09-20
 
 ### Fixed

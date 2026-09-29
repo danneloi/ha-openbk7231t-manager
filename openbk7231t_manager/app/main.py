@@ -11,6 +11,7 @@ from typing import Optional
 from flask import Flask, jsonify, request, send_from_directory, send_file
 from waitress import serve as waitress_serve
 
+import cache_manager
 import config as cfgmod
 import discovery
 import github_release
@@ -168,6 +169,62 @@ def _current_release() -> Optional[github_release.ReleaseInfo]:
         return None
 
 
+CACHE_MAX_SIZE_MB_DEFAULT = 300
+CACHE_AUTO_CLEANUP_DEFAULT = True
+
+
+def _board_title(board_name: str) -> Optional[str]:
+    board = migrate_esphome.find_board(board_name)
+    return board["title"] if board else None
+
+
+def _cache_settings() -> dict:
+    # Deliberately not part of config.yaml's options schema (which would
+    # need a trip to the Supervisor's "Configuration" tab): this is meant
+    # to be adjustable right from the cache list itself, so it's stored as
+    # small bit of app state instead - see AppState in store.py. Existing
+    # installations upgrading from an older version won't have these keys
+    # in their state.json yet, hence the .get() fallbacks rather than
+    # relying on AppState's own (file-doesn't-exist-yet-only) defaults.
+    state = app_state.get()
+    return {
+        "max_size_mb": int(state.get("cache_max_size_mb") or CACHE_MAX_SIZE_MB_DEFAULT),
+        "auto_cleanup": bool(state.get("cache_auto_cleanup", CACHE_AUTO_CLEANUP_DEFAULT)),
+    }
+
+
+def _cache_entry_dict(entry: cache_manager.CacheEntry) -> dict:
+    return {
+        "id": entry.id,
+        "kind": entry.kind,
+        "label": entry.label,
+        "filename": entry.filename,
+        "size_bytes": entry.size_bytes,
+        "mtime": entry.mtime,
+    }
+
+
+def _maybe_auto_cleanup() -> None:
+    """Called right after something adds to the firmware/UF2 cache. Prunes
+    the oldest cached files (never the ones just added) if the configured
+    size limit is both enabled and exceeded."""
+    cfg = _cache_settings()
+    if not cfg["auto_cleanup"]:
+        return
+    max_bytes = cfg["max_size_mb"] * 1024 * 1024
+    entries = cache_manager.list_entries(FIRMWARE_CACHE_DIR, MIGRATE_UF2_CACHE_DIR, board_title_fn=_board_title)
+    if cache_manager.total_size(entries) <= max_bytes:
+        return
+    deleted = cache_manager.cleanup_oldest(
+        FIRMWARE_CACHE_DIR, MIGRATE_UF2_CACHE_DIR, max_bytes, board_title_fn=_board_title
+    )
+    if deleted:
+        log.info(
+            "Cache-Autobereinigung: %d Datei(en) entfernt, um unter %d MB zu bleiben (%s)",
+            len(deleted), cfg["max_size_mb"], ", ".join(e.filename for e in deleted),
+        )
+
+
 def _poll_device_once(dev: dict) -> None:
     info = obk_client.get_info(dev["ip"], password=dev.get("password"))
     if info is None:
@@ -316,6 +373,7 @@ def _start_update(dev: dict, release: github_release.ReleaseInfo) -> dict:
     except Exception as exc:  # noqa: BLE001
         log.exception("Firmware download failed")
         return {"ok": False, "error": f"Download der Firmware fehlgeschlagen: {exc}"}
+    _maybe_auto_cleanup()
 
     # Preferred path: push the firmware bytes directly to the device's
     # /api/ota endpoint - the same mechanism the firmware's own "Web
@@ -680,6 +738,7 @@ def api_migrate_build_uf2():
     except Exception as exc:  # noqa: BLE001
         log.exception("Firmware download for migration failed")
         return jsonify({"error": f"Download der Firmware fehlgeschlagen: {exc}"}), 502
+    _maybe_auto_cleanup()
 
     fw_name = filename.rsplit("_", 1)[0]
     uf2_dir = os.path.join(MIGRATE_UF2_CACHE_DIR, board["name"])
@@ -692,6 +751,7 @@ def api_migrate_build_uf2():
         except migrate_esphome.UF2BuildError as exc:
             log.exception("UF2 build failed")
             return jsonify({"error": f"UF2-Erstellung fehlgeschlagen: {exc}"}), 502
+        _maybe_auto_cleanup()
 
     return jsonify({
         "ok": True,
@@ -759,6 +819,60 @@ def api_migrate_apply_config():
         outcome = obk_client.send_command_cm(ip, str(command), password=password)
         results.append({"command": command, "ok": outcome["ok"], "error": outcome.get("error")})
     return jsonify({"results": results})
+
+
+@ui_app.get("/api/cache")
+def api_cache_list():
+    entries = cache_manager.list_entries(FIRMWARE_CACHE_DIR, MIGRATE_UF2_CACHE_DIR, board_title_fn=_board_title)
+    cfg = _cache_settings()
+    return jsonify({
+        "entries": [_cache_entry_dict(e) for e in entries],
+        "total_bytes": cache_manager.total_size(entries),
+        **cfg,
+    })
+
+
+@ui_app.post("/api/cache/settings")
+def api_cache_settings():
+    body = request.get_json(force=True, silent=True) or {}
+    fields = {}
+    if "max_size_mb" in body:
+        try:
+            max_size_mb = int(body.get("max_size_mb"))
+        except (TypeError, ValueError):
+            return jsonify({"error": "Ungültige Cache-Größe."}), 400
+        if max_size_mb < 10:
+            return jsonify({"error": "Die Cache-Größe muss mindestens 10 MB betragen."}), 400
+        fields["cache_max_size_mb"] = max_size_mb
+    if "auto_cleanup" in body:
+        fields["cache_auto_cleanup"] = bool(body.get("auto_cleanup"))
+    if fields:
+        app_state.set(**fields)
+    return jsonify(_cache_settings())
+
+
+@ui_app.post("/api/cache/delete")
+def api_cache_delete():
+    body = request.get_json(force=True, silent=True) or {}
+    entry_id = (body.get("id") or "").strip()
+    if not cache_manager.delete_entry(FIRMWARE_CACHE_DIR, MIGRATE_UF2_CACHE_DIR, entry_id):
+        return jsonify({"error": "Datei nicht gefunden (evtl. schon gelöscht)."}), 404
+    return jsonify({"ok": True})
+
+
+@ui_app.post("/api/cache/cleanup")
+def api_cache_cleanup():
+    cfg = _cache_settings()
+    max_bytes = cfg["max_size_mb"] * 1024 * 1024
+    deleted = cache_manager.cleanup_oldest(
+        FIRMWARE_CACHE_DIR, MIGRATE_UF2_CACHE_DIR, max_bytes, board_title_fn=_board_title
+    )
+    entries = cache_manager.list_entries(FIRMWARE_CACHE_DIR, MIGRATE_UF2_CACHE_DIR, board_title_fn=_board_title)
+    return jsonify({
+        "deleted": [_cache_entry_dict(e) for e in deleted],
+        "entries": [_cache_entry_dict(e) for e in entries],
+        "total_bytes": cache_manager.total_size(entries),
+    })
 
 
 @ui_app.get("/api/scan")

@@ -113,6 +113,53 @@
       <div class="panel-header"><h2 data-i18n="settingsHeader">Einstellungen</h2></div>
       <div id="settings-list" class="settings-list"></div>
     </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2 data-i18n="cacheHeader">Firmware-Cache</h2>
+        <div class="panel-actions">
+          <button id="btn-cache-cleanup" class="btn btn-secondary" data-i18n="cacheCleanupNow">Jetzt aufräumen</button>
+        </div>
+      </div>
+      <p class="muted" data-i18n="cacheIntro">
+        Heruntergeladene OpenBeken-Firmware und erzeugte UF2-Dateien (siehe
+        "ESPHome ↔ OpenBeken") werden dauerhaft gespeichert und nicht von
+        selbst gelöscht. Hier siehst du, was belegt ist, kannst einzelne
+        Dateien entfernen und eine automatische Aufräumgrenze einrichten -
+        dabei wird immer zuerst das Älteste gelöscht.
+      </p>
+      <p id="cache-total" class="muted"></p>
+      <div class="table-scroll">
+        <table class="device-table">
+          <thead>
+            <tr>
+              <th data-i18n="cacheColType">Typ</th>
+              <th data-i18n="cacheColLabel">Bezeichnung</th>
+              <th data-i18n="cacheColFile">Datei</th>
+              <th data-i18n="cacheColSize">Größe</th>
+              <th data-i18n="cacheColDate">Hinzugefügt</th>
+              <th data-i18n="colActions">Aktionen</th>
+            </tr>
+          </thead>
+          <tbody id="cache-rows">
+            <tr><td colspan="6" class="empty-row" data-i18n="cacheLoading">Lade Cache…</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cache-settings-form">
+        <label class="cache-setting-field">
+          <span data-i18n="cacheMaxSizeLabel">Maximale Cache-Größe (MB)</span>
+          <input type="number" id="cache-max-size" min="10" step="10">
+        </label>
+        <label class="cache-setting-checkbox">
+          <input type="checkbox" id="cache-auto-cleanup">
+          <span data-i18n="cacheAutoCleanupLabel">Automatisch aufräumen, sobald überschritten</span>
+        </label>
+        <button id="btn-cache-save-settings" class="btn btn-primary" data-i18n="cacheSaveSettings">Speichern</button>
+      </div>
+      <p id="cache-settings-status" class="muted"></p>
+    </section>
   </main>
 
   <div id="sensor-modal-overlay" class="modal-overlay" hidden>

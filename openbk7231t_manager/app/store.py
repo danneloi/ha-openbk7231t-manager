@@ -184,6 +184,12 @@ class AppState:
                 "last_release_check": None,
                 "last_notified_version": None,
                 "settings_override": {},
+                # User-adjustable firmware/UF2 cache housekeeping (see
+                # cache_manager.py) - kept here rather than in config.yaml's
+                # options schema so it's editable right from the cache list
+                # in the UI instead of the Supervisor's "Configuration" tab.
+                "cache_max_size_mb": 300,
+                "cache_auto_cleanup": True,
             },
         )
 

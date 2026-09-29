@@ -35,6 +35,10 @@ A Home Assistant **add-on** (not a custom integration) for managing
 - **Mobile-friendly**: the whole UI - device list, forms, tables, and
   dialogs - adapts to phone-sized screens instead of requiring horizontal
   scrolling.
+- **Firmware cache management**: downloaded firmware images and generated
+  UF2 packages are listed with their size, can be deleted individually,
+  and can be auto-pruned (oldest first) once a configurable size limit is
+  exceeded, so they don't just accumulate forever.
 
 ## Screenshots
 

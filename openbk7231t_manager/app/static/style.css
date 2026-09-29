@@ -298,6 +298,37 @@ input, select, textarea {
 
 .version-cell .latest { color: var(--muted); font-size: 0.8rem; display: block; }
 
+/* --- Firmware cache ------------------------------------------------------ */
+
+.cache-settings-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 20px;
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--form-bg);
+  border-radius: 6px;
+}
+.cache-setting-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.cache-setting-field input {
+  width: 100px;
+  padding: 6px 8px;
+}
+.cache-setting-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+.cache-setting-checkbox input { width: 16px; height: 16px; }
+
 /* --- Modal (device sensor detail) -------------------------------------- */
 
 .modal-overlay {
@@ -537,6 +568,10 @@ input, select, textarea {
   .device-table th, .device-table td { padding: 8px 6px; white-space: nowrap; }
 
   .settings-list { flex-direction: column; gap: 10px; }
+
+  .cache-settings-form { flex-direction: column; align-items: stretch; }
+  .cache-setting-field input { width: 100%; }
+  .cache-settings-form .btn { width: 100%; }
 
   .modal-overlay { padding: 10px; }
   .modal { padding: 16px; max-height: 92vh; }

@@ -230,6 +230,30 @@
       viewOnGithub: "Auf GitHub ansehen",
       githubRepoTitle: "OpenBK7231T_App auf GitHub öffnen",
       migrateNavButton: "ESPHome ↔ OpenBeken",
+      cacheHeader: "Firmware-Cache",
+      cacheCleanupNow: "Jetzt aufräumen",
+      cacheIntro: "Heruntergeladene OpenBeken-Firmware und erzeugte UF2-Dateien (siehe \"ESPHome ↔ OpenBeken\") werden dauerhaft gespeichert und nicht von selbst gelöscht. Hier siehst du, was belegt ist, kannst einzelne Dateien entfernen und eine automatische Aufräumgrenze einrichten - dabei wird immer zuerst das Älteste gelöscht.",
+      cacheColType: "Typ",
+      cacheColLabel: "Bezeichnung",
+      cacheColFile: "Datei",
+      cacheColSize: "Größe",
+      cacheColDate: "Hinzugefügt",
+      cacheLoading: "Lade Cache…",
+      cacheEmpty: "Cache ist leer.",
+      cacheKindFirmware: "Firmware",
+      cacheKindUf2: "UF2",
+      cacheTotal: "{count} Datei(en), insgesamt {size}.",
+      cacheMaxSizeLabel: "Maximale Cache-Größe (MB)",
+      cacheAutoCleanupLabel: "Automatisch aufräumen, sobald überschritten",
+      cacheSaveSettings: "Speichern",
+      cacheSettingsSaved: "Gespeichert.",
+      cacheConfirmDelete: "Diese Datei aus dem Cache löschen?",
+      cacheConfirmCleanup: "Älteste Cache-Dateien löschen, bis die eingestellte Größe wieder unterschritten ist?",
+      cacheCleanupNothing: "Cache ist bereits innerhalb der eingestellten Größe - nichts gelöscht.",
+      cacheCleanupDone: "{count} Datei(en) gelöscht.",
+      cacheAlertDeleteFailed: "Löschen fehlgeschlagen: {msg}",
+      cacheAlertCleanupFailed: "Aufräumen fehlgeschlagen: {msg}",
+      cacheAlertSettingsFailed: "Speichern fehlgeschlagen: {msg}",
       notifActive: "aktiv",
       notifInactive: "inaktiv",
       notifSave: "Speichern",
@@ -372,6 +396,30 @@
       viewOnGithub: "View on GitHub",
       githubRepoTitle: "Open OpenBK7231T_App on GitHub",
       migrateNavButton: "ESPHome ↔ OpenBeken",
+      cacheHeader: "Firmware cache",
+      cacheCleanupNow: "Clean up now",
+      cacheIntro: "Downloaded OpenBeken firmware and generated UF2 files (see \"ESPHome ↔ OpenBeken\") are stored permanently and never deleted on their own. Here you can see what's taking up space, remove individual files, and set an automatic cleanup limit - the oldest files are always deleted first.",
+      cacheColType: "Type",
+      cacheColLabel: "Label",
+      cacheColFile: "File",
+      cacheColSize: "Size",
+      cacheColDate: "Added",
+      cacheLoading: "Loading cache…",
+      cacheEmpty: "Cache is empty.",
+      cacheKindFirmware: "Firmware",
+      cacheKindUf2: "UF2",
+      cacheTotal: "{count} file(s), {size} total.",
+      cacheMaxSizeLabel: "Maximum cache size (MB)",
+      cacheAutoCleanupLabel: "Clean up automatically once exceeded",
+      cacheSaveSettings: "Save",
+      cacheSettingsSaved: "Saved.",
+      cacheConfirmDelete: "Delete this file from the cache?",
+      cacheConfirmCleanup: "Delete the oldest cached files until the configured size is no longer exceeded?",
+      cacheCleanupNothing: "Cache is already within the configured size - nothing deleted.",
+      cacheCleanupDone: "{count} file(s) deleted.",
+      cacheAlertDeleteFailed: "Delete failed: {msg}",
+      cacheAlertCleanupFailed: "Cleanup failed: {msg}",
+      cacheAlertSettingsFailed: "Save failed: {msg}",
       notifActive: "active",
       notifInactive: "inactive",
       notifSave: "Save",
@@ -514,6 +562,30 @@
       viewOnGithub: "Voir sur GitHub",
       githubRepoTitle: "Ouvrir OpenBK7231T_App sur GitHub",
       migrateNavButton: "ESPHome ↔ OpenBeken",
+      cacheHeader: "Cache des firmwares",
+      cacheCleanupNow: "Nettoyer maintenant",
+      cacheIntro: "Les firmwares OpenBeken téléchargés et les fichiers UF2 générés (voir « ESPHome ↔ OpenBeken ») sont conservés en permanence et ne sont jamais supprimés automatiquement. Vous pouvez voir ici ce qui occupe de l'espace, supprimer des fichiers individuellement et définir une limite de nettoyage automatique - les fichiers les plus anciens sont toujours supprimés en premier.",
+      cacheColType: "Type",
+      cacheColLabel: "Désignation",
+      cacheColFile: "Fichier",
+      cacheColSize: "Taille",
+      cacheColDate: "Ajouté",
+      cacheLoading: "Chargement du cache…",
+      cacheEmpty: "Le cache est vide.",
+      cacheKindFirmware: "Firmware",
+      cacheKindUf2: "UF2",
+      cacheTotal: "{count} fichier(s), {size} au total.",
+      cacheMaxSizeLabel: "Taille maximale du cache (Mo)",
+      cacheAutoCleanupLabel: "Nettoyer automatiquement en cas de dépassement",
+      cacheSaveSettings: "Enregistrer",
+      cacheSettingsSaved: "Enregistré.",
+      cacheConfirmDelete: "Supprimer ce fichier du cache ?",
+      cacheConfirmCleanup: "Supprimer les fichiers les plus anciens du cache jusqu'à repasser sous la taille configurée ?",
+      cacheCleanupNothing: "Le cache est déjà dans la limite configurée - rien n'a été supprimé.",
+      cacheCleanupDone: "{count} fichier(s) supprimé(s).",
+      cacheAlertDeleteFailed: "Échec de la suppression : {msg}",
+      cacheAlertCleanupFailed: "Échec du nettoyage : {msg}",
+      cacheAlertSettingsFailed: "Échec de l'enregistrement : {msg}",
       notifActive: "actif",
       notifInactive: "inactif",
       notifSave: "Enregistrer",
@@ -656,6 +728,30 @@
       viewOnGithub: "Ver en GitHub",
       githubRepoTitle: "Abrir OpenBK7231T_App en GitHub",
       migrateNavButton: "ESPHome ↔ OpenBeken",
+      cacheHeader: "Caché de firmware",
+      cacheCleanupNow: "Limpiar ahora",
+      cacheIntro: "El firmware de OpenBeken descargado y los archivos UF2 generados (ver «ESPHome ↔ OpenBeken») se guardan de forma permanente y nunca se eliminan solos. Aquí puedes ver qué ocupa espacio, eliminar archivos individuales y configurar un límite de limpieza automática - siempre se elimina primero lo más antiguo.",
+      cacheColType: "Tipo",
+      cacheColLabel: "Descripción",
+      cacheColFile: "Archivo",
+      cacheColSize: "Tamaño",
+      cacheColDate: "Añadido",
+      cacheLoading: "Cargando caché…",
+      cacheEmpty: "El caché está vacío.",
+      cacheKindFirmware: "Firmware",
+      cacheKindUf2: "UF2",
+      cacheTotal: "{count} archivo(s), {size} en total.",
+      cacheMaxSizeLabel: "Tamaño máximo del caché (MB)",
+      cacheAutoCleanupLabel: "Limpiar automáticamente al superarse",
+      cacheSaveSettings: "Guardar",
+      cacheSettingsSaved: "Guardado.",
+      cacheConfirmDelete: "¿Eliminar este archivo del caché?",
+      cacheConfirmCleanup: "¿Eliminar los archivos más antiguos del caché hasta volver a estar por debajo del tamaño configurado?",
+      cacheCleanupNothing: "El caché ya está dentro del tamaño configurado - no se eliminó nada.",
+      cacheCleanupDone: "{count} archivo(s) eliminado(s).",
+      cacheAlertDeleteFailed: "Error al eliminar: {msg}",
+      cacheAlertCleanupFailed: "Error al limpiar: {msg}",
+      cacheAlertSettingsFailed: "Error al guardar: {msg}",
       notifActive: "activo",
       notifInactive: "inactivo",
       notifSave: "Guardar",
@@ -798,6 +894,30 @@
       viewOnGithub: "Ver no GitHub",
       githubRepoTitle: "Abrir o OpenBK7231T_App no GitHub",
       migrateNavButton: "ESPHome ↔ OpenBeken",
+      cacheHeader: "Cache de firmware",
+      cacheCleanupNow: "Limpar agora",
+      cacheIntro: "O firmware OpenBeken descarregado e os ficheiros UF2 gerados (ver \"ESPHome ↔ OpenBeken\") são guardados permanentemente e nunca são eliminados sozinhos. Aqui podes ver o que está a ocupar espaço, remover ficheiros individualmente e definir um limite de limpeza automática - os ficheiros mais antigos são sempre eliminados primeiro.",
+      cacheColType: "Tipo",
+      cacheColLabel: "Descrição",
+      cacheColFile: "Ficheiro",
+      cacheColSize: "Tamanho",
+      cacheColDate: "Adicionado",
+      cacheLoading: "A carregar cache…",
+      cacheEmpty: "A cache está vazia.",
+      cacheKindFirmware: "Firmware",
+      cacheKindUf2: "UF2",
+      cacheTotal: "{count} ficheiro(s), {size} no total.",
+      cacheMaxSizeLabel: "Tamanho máximo da cache (MB)",
+      cacheAutoCleanupLabel: "Limpar automaticamente quando excedido",
+      cacheSaveSettings: "Guardar",
+      cacheSettingsSaved: "Guardado.",
+      cacheConfirmDelete: "Eliminar este ficheiro da cache?",
+      cacheConfirmCleanup: "Eliminar os ficheiros mais antigos da cache até ficar novamente abaixo do tamanho configurado?",
+      cacheCleanupNothing: "A cache já está dentro do tamanho configurado - nada foi eliminado.",
+      cacheCleanupDone: "{count} ficheiro(s) eliminado(s).",
+      cacheAlertDeleteFailed: "Falha ao eliminar: {msg}",
+      cacheAlertCleanupFailed: "Falha ao limpar: {msg}",
+      cacheAlertSettingsFailed: "Falha ao guardar: {msg}",
       notifActive: "ativo",
       notifInactive: "inativo",
       notifSave: "Guardar",
@@ -871,6 +991,18 @@
     return d.toLocaleString(DATE_LOCALES[getLang()] || "de-DE");
   }
 
+  function fmtBytes(bytes) {
+    if (!bytes) return "0 B";
+    const units = ["B", "KB", "MB", "GB"];
+    let value = bytes;
+    let unit = 0;
+    while (value >= 1024 && unit < units.length - 1) {
+      value /= 1024;
+      unit += 1;
+    }
+    return `${value.toFixed(unit === 0 ? 0 : 1)} ${units[unit]}`;
+  }
+
   const langSelect = $("#lang-select");
   if (langSelect) {
     langSelect.value = getLang();
@@ -880,6 +1012,7 @@
       renderDevices(lastDevices);
       updateBanner(lastDevices);
       loadSettings();
+      loadCache();
       loadRelease();
       loadChannels().catch(() => {});
       if (typeof renderNewChannelFields === "function" && !newChannelForm.hidden) renderNewChannelFields();
@@ -1082,6 +1215,42 @@
     list.innerHTML = rows.map(([k, v]) => `<span class="setting-item"><span class="setting-label">${escapeHtml(k)}:</span> <span class="setting-value">${escapeHtml(String(v))}</span></span>`).join("");
   }
 
+  const CACHE_KIND_LABEL_KEY = { firmware: "cacheKindFirmware", uf2: "cacheKindUf2" };
+
+  function renderCache(data) {
+    const rows = $("#cache-rows");
+    const entries = data.entries || [];
+    if (!entries.length) {
+      rows.innerHTML = `<tr><td colspan="6" class="empty-row" data-i18n="cacheEmpty">${escapeHtml(t("cacheEmpty"))}</td></tr>`;
+    } else {
+      // Newest first for readability; auto-/manual cleanup still removes
+      // the oldest ones regardless of how the list is displayed here.
+      const sorted = [...entries].sort((a, b) => b.mtime - a.mtime);
+      rows.innerHTML = sorted.map((e) => `
+        <tr>
+          <td>${escapeHtml(t(CACHE_KIND_LABEL_KEY[e.kind] || e.kind))}</td>
+          <td>${escapeHtml(e.label)}</td>
+          <td>${escapeHtml(e.filename)}</td>
+          <td>${escapeHtml(fmtBytes(e.size_bytes))}</td>
+          <td>${escapeHtml(fmtDate(e.mtime))}</td>
+          <td class="row-actions">
+            <button class="icon-btn icon-btn-delete btn-cache-delete" data-id="${escapeAttr(e.id)}" title="${escapeAttr(t("deleteTitle"))}">${ICON_TRASH}</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+    $("#cache-total").textContent = t("cacheTotal", { size: fmtBytes(data.total_bytes || 0), count: entries.length });
+    const maxSizeInput = $("#cache-max-size");
+    const autoCleanupInput = $("#cache-auto-cleanup");
+    if (document.activeElement !== maxSizeInput) maxSizeInput.value = data.max_size_mb;
+    if (document.activeElement !== autoCleanupInput) autoCleanupInput.checked = !!data.auto_cleanup;
+  }
+
+  async function loadCache() {
+    const data = await api("GET", "api/cache");
+    renderCache(data);
+  }
+
   async function refreshAll() {
     await Promise.all([loadDevices(), loadRelease()]);
   }
@@ -1095,6 +1264,56 @@
       await refreshAll();
     } catch (e) {
       alert(t("alertCheckFailed", { msg: e.message }));
+    } finally {
+      ev.target.disabled = false;
+    }
+  });
+
+  $("#cache-rows").addEventListener("click", async (ev) => {
+    const btn = ev.target.closest(".btn-cache-delete");
+    if (!btn) return;
+    if (!confirm(t("cacheConfirmDelete"))) return;
+    btn.disabled = true;
+    try {
+      await api("POST", "api/cache/delete", { id: btn.dataset.id });
+      await loadCache();
+    } catch (e) {
+      alert(t("cacheAlertDeleteFailed", { msg: e.message }));
+      btn.disabled = false;
+    }
+  });
+
+  $("#btn-cache-cleanup").addEventListener("click", async (ev) => {
+    if (!confirm(t("cacheConfirmCleanup"))) return;
+    ev.target.disabled = true;
+    try {
+      const result = await api("POST", "api/cache/cleanup", {});
+      renderCache(result);
+      if (!result.deleted.length) {
+        alert(t("cacheCleanupNothing"));
+      } else {
+        alert(t("cacheCleanupDone", { count: result.deleted.length }));
+      }
+    } catch (e) {
+      alert(t("cacheAlertCleanupFailed", { msg: e.message }));
+    } finally {
+      ev.target.disabled = false;
+    }
+  });
+
+  $("#btn-cache-save-settings").addEventListener("click", async (ev) => {
+    ev.target.disabled = true;
+    const statusEl = $("#cache-settings-status");
+    statusEl.textContent = "";
+    try {
+      const maxSizeMb = parseInt($("#cache-max-size").value, 10);
+      const autoCleanup = $("#cache-auto-cleanup").checked;
+      const result = await api("POST", "api/cache/settings", { max_size_mb: maxSizeMb, auto_cleanup: autoCleanup });
+      $("#cache-max-size").value = result.max_size_mb;
+      $("#cache-auto-cleanup").checked = result.auto_cleanup;
+      statusEl.textContent = t("cacheSettingsSaved");
+    } catch (e) {
+      statusEl.textContent = t("cacheAlertSettingsFailed", { msg: e.message });
     } finally {
       ev.target.disabled = false;
     }
@@ -1686,6 +1905,7 @@
 
   refreshAll();
   loadSettings();
+  loadCache();
   loadChannels();
   setInterval(loadDevices, 10000);
 })();
