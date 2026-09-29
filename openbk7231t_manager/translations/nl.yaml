@@ -1,0 +1,25 @@
+configuration:
+  scan_subnet:
+    name: Te scannen subnet
+    description: >-
+      CIDR-subnet dat wordt gescand op apparaten (bijv. 192.168.1.0/24). Laat
+      leeg om het subnet van de netwerkinterface van de add-on automatisch te
+      detecteren.
+  poll_interval_minutes:
+    name: Pollinterval (minuten)
+    description: Hoe vaak bekende apparaten worden bevraagd op status en firmwareversie.
+  release_check_interval_hours:
+    name: Controle-interval voor releases (uur)
+    description: Hoe vaak de add-on GitHub controleert op nieuwe OpenBK7231T_App-releases.
+  notify_on_update:
+    name: Melden bij update
+    description: Stuurt een permanente Home Assistant-melding wanneer een nieuwe firmwarerelease beschikbaar is.
+  firmware_server_port:
+    name: Poort van de firmwareserver
+    description: >-
+      Lokale poort die de add-on gebruikt om firmwarebestanden tijdens een
+      OTA-update naar apparaten te sturen. Moet bereikbaar zijn vanaf je
+      IoT-apparaten.
+  log_level:
+    name: Logniveau
+    description: Uitgebreidheid van de loguitvoer van de add-on.

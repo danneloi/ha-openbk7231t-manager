@@ -1,0 +1,25 @@
+configuration:
+  scan_subnet:
+    name: Skannitav alamvõrk
+    description: >-
+      CIDR-alamvõrk, kust seadmeid otsitakse (nt 192.168.1.0/24). Jäta
+      tühjaks, et lisandmoodul tuvastaks oma võrguliidese alamvõrgu
+      automaatselt.
+  poll_interval_minutes:
+    name: Päringuintervall (minutid)
+    description: Kui sageli kontrollitakse teadaolevate seadmete olekut ja püsivara versiooni.
+  release_check_interval_hours:
+    name: Väljalasete kontrolli intervall (tunnid)
+    description: Kui sageli kontrollib lisandmoodul GitHubist uusi OpenBK7231T_App väljalaseid.
+  notify_on_update:
+    name: Teavita uuenduse korral
+    description: Saadab püsiva Home Assistanti teavituse, kui uus püsivara väljalase on saadaval.
+  firmware_server_port:
+    name: Püsivara serveri port
+    description: >-
+      Kohalik port, mida lisandmoodul kasutab püsivarafailide edastamiseks
+      seadmetele OTA-uuenduse ajal. Peab olema sinu IoT-seadmetest
+      ligipääsetav.
+  log_level:
+    name: Logitase
+    description: Lisandmooduli logiväljundi detailsus.

@@ -1,0 +1,24 @@
+configuration:
+  scan_subnet:
+    name: Scannet undernet
+    description: >-
+      CIDR-undernet, der skal scannes for enheder (f.eks. 192.168.1.0/24). Lad
+      stå tomt for automatisk registrering af undernettet på add-on'ets
+      netværksinterface.
+  poll_interval_minutes:
+    name: Afspørgningsinterval (minutter)
+    description: Hvor ofte kendte enheder afspørges for status og firmwareversion.
+  release_check_interval_hours:
+    name: Interval for versionstjek (timer)
+    description: Hvor ofte add-on'et tjekker GitHub for nye OpenBK7231T_App-udgivelser.
+  notify_on_update:
+    name: Giv besked ved opdatering
+    description: Sender en vedvarende Home Assistant-meddelelse, når en ny firmwareudgivelse er tilgængelig.
+  firmware_server_port:
+    name: Firmwareserverport
+    description: >-
+      Lokal port, som add-on'et bruger til at levere firmwarefiler til enheder
+      under en OTA-opdatering. Skal kunne nås fra dine IoT-enheder.
+  log_level:
+    name: Logniveau
+    description: Detaljeringsgrad for add-on'ets logoutput.

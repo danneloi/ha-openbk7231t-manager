@@ -1,0 +1,25 @@
+configuration:
+  scan_subnet:
+    name: Skannattava aliverkko
+    description: >-
+      CIDR-aliverkko, josta laitteita etsitään (esim. 192.168.1.0/24). Jätä
+      tyhjäksi, jotta lisäosan verkkoliitännän aliverkko tunnistetaan
+      automaattisesti.
+  poll_interval_minutes:
+    name: Kyselyväli (minuuttia)
+    description: Kuinka usein tunnettujen laitteiden tila ja laiteohjelmistoversio tarkistetaan.
+  release_check_interval_hours:
+    name: Julkaisujen tarkistusväli (tuntia)
+    description: Kuinka usein lisäosa tarkistaa GitHubista uusia OpenBK7231T_App-julkaisuja.
+  notify_on_update:
+    name: Ilmoita päivityksestä
+    description: Lähettää pysyvän Home Assistant -ilmoituksen, kun uusi laiteohjelmistojulkaisu on saatavilla.
+  firmware_server_port:
+    name: Laiteohjelmistopalvelimen portti
+    description: >-
+      Paikallinen portti, jota lisäosa käyttää laiteohjelmistotiedostojen
+      tarjoamiseen laitteille OTA-päivityksen aikana. Oltava tavoitettavissa
+      IoT-laitteiltasi.
+  log_level:
+    name: Lokitaso
+    description: Lisäosan lokitulosteen yksityiskohtaisuus.

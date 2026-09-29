@@ -1,0 +1,25 @@
+configuration:
+  scan_subnet:
+    name: Vizsgált alhálózat
+    description: >-
+      A CIDR-alhálózat, amelyben eszközöket keresünk (pl. 192.168.1.0/24).
+      Hagyja üresen, hogy a bővítmény automatikusan felismerje a hálózati
+      interfészének alhálózatát.
+  poll_interval_minutes:
+    name: Lekérdezési gyakoriság (perc)
+    description: Milyen gyakran kérdezi le a bővítmény az ismert eszközök állapotát és firmware-verzióját.
+  release_check_interval_hours:
+    name: Kiadásellenőrzési gyakoriság (óra)
+    description: Milyen gyakran ellenőrzi a bővítmény a GitHubon az új OpenBK7231T_App kiadásokat.
+  notify_on_update:
+    name: Értesítés frissítéskor
+    description: Tartós Home Assistant értesítést küld, amikor új firmware-kiadás érhető el.
+  firmware_server_port:
+    name: Firmware-kiszolgáló portja
+    description: >-
+      A bővítmény által OTA-frissítés során az eszközök firmware-fájljainak
+      kiszolgálásához használt helyi port. Az IoT-eszközeidnek el kell
+      érniük.
+  log_level:
+    name: Naplózási szint
+    description: A bővítmény naplókimenetének részletessége.

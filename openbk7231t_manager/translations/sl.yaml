@@ -1,0 +1,25 @@
+configuration:
+  scan_subnet:
+    name: Skenirano podomrežje
+    description: >-
+      Podomrežje CIDR, v katerem se iščejo naprave (npr. 192.168.1.0/24).
+      Pustite prazno, da dodatek samodejno zazna podomrežje svojega omrežnega
+      vmesnika.
+  poll_interval_minutes:
+    name: Interval preverjanja (minute)
+    description: Kako pogosto se pri znanih napravah preverjata stanje in različica vdelane programske opreme.
+  release_check_interval_hours:
+    name: Interval preverjanja izdaj (ure)
+    description: Kako pogosto dodatek na GitHubu preverja nove izdaje OpenBK7231T_App.
+  notify_on_update:
+    name: Obvesti ob posodobitvi
+    description: Pošlje trajno obvestilo Home Assistant, ko je na voljo nova izdaja vdelane programske opreme.
+  firmware_server_port:
+    name: Vrata strežnika za vdelano programsko opremo
+    description: >-
+      Lokalna vrata, ki jih dodatek uporablja za posredovanje datotek vdelane
+      programske opreme napravam med posodobitvijo OTA. Morajo biti dosegljiva
+      z vaših naprav IoT.
+  log_level:
+    name: Raven beleženja
+    description: Podrobnost izpisa dnevnika dodatka.

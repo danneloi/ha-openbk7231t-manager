@@ -1,0 +1,25 @@
+configuration:
+  scan_subnet:
+    name: Skenējamais apakštīkls
+    description: >-
+      CIDR apakštīkls, kurā meklēt ierīces (piem., 192.168.1.0/24). Atstājiet
+      tukšu, lai papildinājums automātiski noteiktu tā tīkla saskarnes
+      apakštīklu.
+  poll_interval_minutes:
+    name: Aptaujas intervāls (minūtes)
+    description: Cik bieži tiek pārbaudīts zināmo ierīču statuss un aparātprogrammatūras versija.
+  release_check_interval_hours:
+    name: Izlaidumu pārbaudes intervāls (stundas)
+    description: Cik bieži papildinājums pārbauda GitHub, vai nav jaunu OpenBK7231T_App izlaidumu.
+  notify_on_update:
+    name: Paziņot par atjauninājumu
+    description: Nosūta pastāvīgu Home Assistant paziņojumu, kad ir pieejams jauns aparātprogrammatūras izlaidums.
+  firmware_server_port:
+    name: Aparātprogrammatūras servera ports
+    description: >-
+      Lokālais ports, ko papildinājums izmanto, lai OTA atjaunināšanas laikā
+      piegādātu aparātprogrammatūras failus ierīcēm. Tam jābūt sasniedzamam no
+      jūsu IoT ierīcēm.
+  log_level:
+    name: Žurnalēšanas līmenis
+    description: Papildinājuma žurnāla izvades detalizācijas pakāpe.

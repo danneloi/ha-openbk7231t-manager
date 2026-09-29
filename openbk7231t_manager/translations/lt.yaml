@@ -1,0 +1,25 @@
+configuration:
+  scan_subnet:
+    name: Tikrinamas potinklis
+    description: >-
+      CIDR potinklis, kuriame ieškoma įrenginių (pvz., 192.168.1.0/24).
+      Palikite tuščią, kad priedas automatiškai aptiktų savo tinklo sąsajos
+      potinklį.
+  poll_interval_minutes:
+    name: Apklausos intervalas (minutėmis)
+    description: Kaip dažnai tikrinama žinomų įrenginių būsena ir programinės aparatinės įrangos versija.
+  release_check_interval_hours:
+    name: Laidų tikrinimo intervalas (valandomis)
+    description: Kaip dažnai priedas tikrina „GitHub“ dėl naujų „OpenBK7231T_App“ laidų.
+  notify_on_update:
+    name: Pranešti atnaujinus
+    description: Siunčia nuolatinį „Home Assistant“ pranešimą, kai yra pasiekiama nauja programinės aparatinės įrangos laida.
+  firmware_server_port:
+    name: Programinės aparatinės įrangos serverio prievadas
+    description: >-
+      Vietinis prievadas, kurį priedas naudoja programinės aparatinės įrangos
+      failams pateikti įrenginiams OTA atnaujinimo metu. Turi būti pasiekiamas
+      iš jūsų IoT įrenginių.
+  log_level:
+    name: Žurnalo lygis
+    description: Priedo žurnalo išvesties detalumas.

@@ -149,6 +149,30 @@ main { padding: 16px 20px 40px; max-width: 1100px; margin: 0 auto; }
 .panel-header h2 { font-size: 1.05rem; margin: 0; }
 .panel-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
+.panel-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.panel-toggle:focus-visible { outline: 2px solid var(--accent, #3b82f6); outline-offset: 2px; border-radius: 4px; }
+.panel-chevron {
+  display: inline-block;
+  font-size: 0.85em;
+  line-height: 1;
+  transition: transform 0.15s ease;
+  transform: rotate(0deg);
+}
+.panel-toggle[aria-expanded="true"] .panel-chevron { transform: rotate(90deg); }
+.panel-body { margin-top: 4px; }
+
 .btn {
   border: none;
   border-radius: 6px;

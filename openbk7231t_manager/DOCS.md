@@ -2,6 +2,32 @@
 
 > Eine kompakte Versionsübersicht gibt es auch in [CHANGELOG.md](CHANGELOG.md).
 
+## Änderungen in 1.6.0
+
+- **Einklappbare Bereiche**: Die Überschriften der Bereiche "Geräte",
+  "Benachrichtigungen", "Einstellungen" und "Firmware-Cache" auf der
+  Hauptseite sind jetzt anklickbar. Ein Klick auf die Überschrift klappt
+  den jeweiligen Bereich auf oder wieder zu - der Inhalt wird also nicht
+  mehr ungefragt angezeigt. "Geräte" ist standardmäßig geöffnet, die
+  anderen drei starten eingeklappt, damit die Seite bei wachsendem
+  Funktionsumfang übersichtlich bleibt. Der Auf-/Zugeklappt-Zustand jedes
+  Bereichs wird sich (pro Browser) gemerkt und bleibt auch nach einem
+  Neuladen der Seite erhalten.
+- **19 zusätzliche Sprachen**: Bulgarisch, Kroatisch, Tschechisch,
+  Dänisch, Niederländisch, Estnisch, Finnisch, Griechisch, Ungarisch,
+  Irisch (Gälisch), Italienisch, Lettisch, Litauisch, Maltesisch,
+  Polnisch, Rumänisch, Slowakisch, Slowenisch und Schwedisch - damit
+  stehen jetzt alle 24 offiziellen EU-Sprachen zur Verfügung, zusätzlich
+  zu den bisherigen Deutsch, Englisch, Englisch (US), Französisch,
+  Spanisch und Portugiesisch. Übersetzt wurden alle Texte sowohl auf der
+  Hauptseite als auch auf der Seite "ESPHome ↔ OpenBeken".
+- **Flaggen-Symbol**: In der Sprachauswahl wird jede Sprache zusätzlich
+  mit ihrer Flagge angezeigt.
+- **Übersetzung der Add-on-Konfiguration**: Auch die von Home Assistant
+  selbst angezeigten Texte im Konfigurations-Tab des Add-ons (Namen und
+  Beschreibungen der Optionen) liegen jetzt in all diesen Sprachen vor -
+  vorher gab es dafür nur Deutsch und Englisch.
+
 ## Änderungen in 1.5.0
 
 - **Neuer Bereich "Firmware-Cache"** auf der Hauptseite: Heruntergeladene

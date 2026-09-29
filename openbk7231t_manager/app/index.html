@@ -15,12 +15,31 @@
       </a>
       <a id="btn-migrate" class="btn btn-secondary" href="migrate.html" data-i18n="migrateNavButton">ESPHome ↔ OpenBeken</a>
       <select id="lang-select" class="lang-select" title="Sprache / Language">
-        <option value="de">Deutsch</option>
-        <option value="en">English</option>
-        <option value="en-US">English (US)</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-        <option value="pt">Português</option>
+        <option value="de">🇩🇪 Deutsch</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="en-US">🇺🇸 English (US)</option>
+        <option value="bg">🇧🇬 Български</option>
+        <option value="hr">🇭🇷 Hrvatski</option>
+        <option value="cs">🇨🇿 Čeština</option>
+        <option value="da">🇩🇰 Dansk</option>
+        <option value="nl">🇳🇱 Nederlands</option>
+        <option value="et">🇪🇪 Eesti</option>
+        <option value="fi">🇫🇮 Suomi</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="el">🇬🇷 Ελληνικά</option>
+        <option value="hu">🇭🇺 Magyar</option>
+        <option value="ga">🇮🇪 Gaeilge</option>
+        <option value="it">🇮🇹 Italiano</option>
+        <option value="lv">🇱🇻 Latviešu</option>
+        <option value="lt">🇱🇹 Lietuvių</option>
+        <option value="mt">🇲🇹 Malti</option>
+        <option value="pl">🇵🇱 Polski</option>
+        <option value="pt">🇵🇹 Português</option>
+        <option value="ro">🇷🇴 Română</option>
+        <option value="sk">🇸🇰 Slovenčina</option>
+        <option value="sl">🇸🇮 Slovenščina</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="sv">🇸🇪 Svenska</option>
       </select>
       <button id="release-badge" type="button" class="badge badge-button" data-i18n-title="viewReleaseNotes" title="Release-Notes anzeigen">Release: –</button>
       <button id="btn-check-release" class="btn btn-secondary" data-i18n="checkRelease">Auf Updates prüfen</button>
@@ -36,13 +55,17 @@
 
     <section class="panel">
       <div class="panel-header">
-        <h2 data-i18n="devicesHeader">Geräte</h2>
+        <button type="button" class="panel-toggle" data-panel-key="devices" aria-expanded="true">
+          <span class="panel-chevron" aria-hidden="true">▸</span>
+          <h2 data-i18n="devicesHeader">Geräte</h2>
+        </button>
         <div class="panel-actions">
           <button id="btn-scan" class="btn btn-secondary" data-i18n="scanNetwork">Netzwerk scannen</button>
           <button id="btn-show-add" class="btn btn-primary" data-i18n="addDevice">Gerät hinzufügen</button>
         </div>
       </div>
 
+      <div class="panel-body">
       <form id="form-add-device" class="add-device-form" hidden>
         <input type="text" id="add-ip" data-i18n-placeholder="addIpPlaceholder" placeholder="IP-Adresse (z. B. 192.168.1.50)" required>
         <input type="text" id="add-name" data-i18n-placeholder="addNamePlaceholder" placeholder="Name (optional)">
@@ -69,6 +92,7 @@
           </tbody>
         </table>
       </div>
+      </div>
     </section>
 
     <section id="scan-panel" class="panel" hidden>
@@ -88,7 +112,13 @@
     </section>
 
     <section class="panel">
-      <div class="panel-header"><h2 data-i18n="notificationsHeader">Benachrichtigungen</h2></div>
+      <div class="panel-header">
+        <button type="button" class="panel-toggle" data-panel-key="notifications" aria-expanded="false">
+          <span class="panel-chevron" aria-hidden="true">▸</span>
+          <h2 data-i18n="notificationsHeader">Benachrichtigungen</h2>
+        </button>
+      </div>
+      <div class="panel-body" hidden>
       <p class="muted" data-i18n="notificationsIntro">
         Lege fest, wie du benachrichtigt werden möchtest, wenn eine neue
         OpenBK7231T_App-Firmware erscheint. Du kannst mehrere Kanäle
@@ -107,20 +137,32 @@
         <div class="channel-type-picker" id="channel-type-picker"></div>
         <div id="new-channel-fields"></div>
       </div>
-    </section>
-
-    <section class="panel">
-      <div class="panel-header"><h2 data-i18n="settingsHeader">Einstellungen</h2></div>
-      <div id="settings-list" class="settings-list"></div>
+      </div>
     </section>
 
     <section class="panel">
       <div class="panel-header">
-        <h2 data-i18n="cacheHeader">Firmware-Cache</h2>
+        <button type="button" class="panel-toggle" data-panel-key="settings" aria-expanded="false">
+          <span class="panel-chevron" aria-hidden="true">▸</span>
+          <h2 data-i18n="settingsHeader">Einstellungen</h2>
+        </button>
+      </div>
+      <div class="panel-body" hidden>
+      <div id="settings-list" class="settings-list"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <button type="button" class="panel-toggle" data-panel-key="cache" aria-expanded="false">
+          <span class="panel-chevron" aria-hidden="true">▸</span>
+          <h2 data-i18n="cacheHeader">Firmware-Cache</h2>
+        </button>
         <div class="panel-actions">
           <button id="btn-cache-cleanup" class="btn btn-secondary" data-i18n="cacheCleanupNow">Jetzt aufräumen</button>
         </div>
       </div>
+      <div class="panel-body" hidden>
       <p class="muted" data-i18n="cacheIntro">
         Heruntergeladene OpenBeken-Firmware und erzeugte UF2-Dateien (siehe
         "ESPHome ↔ OpenBeken") werden dauerhaft gespeichert und nicht von
@@ -159,6 +201,7 @@
         <button id="btn-cache-save-settings" class="btn btn-primary" data-i18n="cacheSaveSettings">Speichern</button>
       </div>
       <p id="cache-settings-status" class="muted"></p>
+      </div>
     </section>
   </main>
 

@@ -1,0 +1,25 @@
+configuration:
+  scan_subnet:
+    name: Subrețea scanată
+    description: >-
+      Subrețea CIDR în care se caută dispozitive (de ex. 192.168.1.0/24).
+      Lăsați gol pentru a detecta automat subrețeaua interfeței de rețea a
+      add-on-ului.
+  poll_interval_minutes:
+    name: Interval de interogare (minute)
+    description: Cât de des sunt interogate dispozitivele cunoscute pentru stare și versiunea firmware-ului.
+  release_check_interval_hours:
+    name: Interval de verificare a versiunilor (ore)
+    description: Cât de des verifică add-on-ul pe GitHub versiuni noi ale OpenBK7231T_App.
+  notify_on_update:
+    name: Notificare la actualizare
+    description: Trimite o notificare persistentă Home Assistant atunci când este disponibilă o nouă versiune de firmware.
+  firmware_server_port:
+    name: Portul serverului de firmware
+    description: >-
+      Portul local folosit de add-on pentru a livra fișierele firmware către
+      dispozitive în timpul unei actualizări OTA. Trebuie să fie accesibil din
+      dispozitivele tale IoT.
+  log_level:
+    name: Nivel de jurnalizare
+    description: Nivelul de detaliu al jurnalului add-on-ului.

@@ -1,0 +1,23 @@
+configuration:
+  scan_subnet:
+    name: Skenirana podmreža
+    description: >-
+      CIDR podmreža za pretraživanje uređaja (npr. 192.168.1.0/24). Ostavite
+      prazno za automatsko prepoznavanje podmreže mrežnog sučelja dodatka.
+  poll_interval_minutes:
+    name: Interval provjere (minute)
+    description: Koliko često se poznati uređaji provjeravaju za status i verziju firmvera.
+  release_check_interval_hours:
+    name: Interval provjere izdanja (sati)
+    description: Koliko često dodatak provjerava GitHub za nova OpenBK7231T_App izdanja.
+  notify_on_update:
+    name: Obavijesti pri ažuriranju
+    description: Šalje trajnu Home Assistant obavijest kada je dostupno novo izdanje firmvera.
+  firmware_server_port:
+    name: Port poslužitelja firmvera
+    description: >-
+      Lokalni port koji dodatak koristi za posluživanje datoteka firmvera
+      uređajima tijekom OTA ažuriranja. Mora biti dostupan vašim IoT uređajima.
+  log_level:
+    name: Razina zapisivanja
+    description: Opširnost izlaza zapisnika dodatka.

@@ -1,0 +1,25 @@
+configuration:
+  scan_subnet:
+    name: Skenovaná podsieť
+    description: >-
+      Podsieť CIDR, v ktorej sa majú vyhľadávať zariadenia (napr.
+      192.168.1.0/24). Ponechajte prázdne, aby doplnok automaticky rozpoznal
+      podsieť svojho sieťového rozhrania.
+  poll_interval_minutes:
+    name: Interval dopytovania (minúty)
+    description: Ako často sa zisťuje stav a verzia firmvéru známych zariadení.
+  release_check_interval_hours:
+    name: Interval kontroly vydaní (hodiny)
+    description: Ako často doplnok kontroluje GitHub kvôli novým vydaniam OpenBK7231T_App.
+  notify_on_update:
+    name: Upozorniť pri aktualizácii
+    description: Odošle trvalé upozornenie Home Assistant, keď je k dispozícii nové vydanie firmvéru.
+  firmware_server_port:
+    name: Port servera firmvéru
+    description: >-
+      Lokálny port, ktorý doplnok používa na poskytovanie súborov firmvéru
+      zariadeniam počas OTA aktualizácie. Musí byť dostupný z vašich IoT
+      zariadení.
+  log_level:
+    name: Úroveň logovania
+    description: Podrobnosť výstupu denníka doplnku.

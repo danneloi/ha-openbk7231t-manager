@@ -14,8 +14,14 @@ A Home Assistant **add-on** (not a custom integration) for managing
   data, neatly grouped (Wi-Fi connection, power consumption, diagnostics,
   environment), with signal quality (RSSI) color-coded. Both the device
   name and individual sensor labels can be renamed there.
-- **Multi-language UI**: German, English, English (US), French, Spanish,
-  and Portuguese, switchable from the top bar.
+- **Multi-language UI**: all 24 official EU languages, plus English (US),
+  switchable from the top bar with a flag icon showing the current
+  selection. The Home Assistant Supervisor's own configuration texts for
+  the add-on are translated into all of them too.
+- **Collapsible panels**: click a panel's heading (Devices, Notifications,
+  Settings, Firmware cache) to expand or collapse it; the layout you pick
+  is remembered across reloads, so the page stays tidy as features are
+  added.
 - **Notifications**: periodically checks GitHub for new
   OpenBK7231T_App releases and notifies you — via a Home Assistant
   notification, Telegram, or WhatsApp, with a freely editable message.

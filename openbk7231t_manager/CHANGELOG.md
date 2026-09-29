@@ -4,6 +4,28 @@ All notable changes to this add-on are documented here. Format loosely
 follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). More
 detailed explanations for each change are in [DOCS.md](DOCS.md) (German).
 
+## [1.6.0] - 2026-09-29
+
+### Added
+- Collapsible panels on the main page: click a panel's heading (Devices,
+  Notifications, Settings, Firmware cache) to expand or collapse its
+  content. The "Devices" panel stays open by default; the others start
+  collapsed to keep the page tidy as more features are added. The
+  open/closed state of each panel is remembered (per browser) across
+  reloads.
+- 19 additional UI languages: Bulgarian, Croatian, Czech, Danish, Dutch,
+  Estonian, Finnish, Greek, Hungarian, Irish, Italian, Latvian,
+  Lithuanian, Maltese, Polish, Romanian, Slovak, Slovenian and Swedish -
+  covering all 24 official EU languages alongside the existing German,
+  English, English (US), French, Spanish and Portuguese. Every UI string
+  on both the main page and the "ESPHome ↔ OpenBeken" migration page is
+  translated.
+- Each language in the selector is shown with its flag next to its name.
+- The add-on's Home Assistant Supervisor-level configuration texts
+  (option names/descriptions shown in the Configuration tab) are now
+  also translated into all of the languages above (previously only
+  German and English existed there).
+
 ## [1.5.0] - 2026-09-28
 
 ### Added

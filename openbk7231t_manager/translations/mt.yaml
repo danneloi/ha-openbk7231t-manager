@@ -1,0 +1,24 @@
+configuration:
+  scan_subnet:
+    name: Sottonetwerk skennjat
+    description: >-
+      Sottonetwerk CIDR li għandu jiġi skennjat għal apparati (eż.
+      192.168.1.0/24). Ħalli vojt biex tinstab awtomatikament is-sottonetwerk
+      tal-interfaċċa tan-netwerk tal-add-on.
+  poll_interval_minutes:
+    name: Intervall ta' stħarriġ (minuti)
+    description: Kemm-il darba jiġu ċċekkjati l-apparati magħrufa għall-istatus u l-verżjoni tal-firmware.
+  release_check_interval_hours:
+    name: Intervall ta' verifika tal-verżjonijiet (sigħat)
+    description: Kemm-il darba l-add-on jiċċekkja GitHub għal verżjonijiet ġodda ta' OpenBK7231T_App.
+  notify_on_update:
+    name: Innotifika mal-aġġornament
+    description: Jibgħat notifika persistenti ta' Home Assistant meta tkun disponibbli verżjoni ġdida tal-firmware.
+  firmware_server_port:
+    name: Port tas-server tal-firmware
+    description: >-
+      Port lokali li l-add-on juża biex jaqdi fajls tal-firmware lill-apparati
+      waqt aġġornament OTA. Irid ikun aċċessibbli mill-apparati IoT tiegħek.
+  log_level:
+    name: Livell tal-log
+    description: Il-livell ta' dettall tal-output tal-log tal-add-on.

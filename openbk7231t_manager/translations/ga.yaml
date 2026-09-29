@@ -1,0 +1,25 @@
+configuration:
+  scan_subnet:
+    name: Fo-líonra scanta
+    description: >-
+      Fo-líonra CIDR le scanadh ar lorg gléasanna (m.sh. 192.168.1.0/24). Fág
+      bán chun fo-líonra chomhéadan líonra an bhreisiúin a bhraith go
+      huathoibríoch.
+  poll_interval_minutes:
+    name: Eatramh pobalbhreithe (nóiméad)
+    description: Cé chomh minic is a dhéantar pobalbhreith ar ghléasanna aitheanta maidir le stádas agus leagan an bhogearra dochtain.
+  release_check_interval_hours:
+    name: Eatramh seiceála eisiúintí (uair)
+    description: Cé chomh minic a sheiceálann an breiseán GitHub le haghaidh eisiúintí nua OpenBK7231T_App.
+  notify_on_update:
+    name: Fógra a thabhairt ar nuashonrú
+    description: Seolann fógra buan Home Assistant nuair a bhíonn eisiúint nua bogearra dochtain ar fáil.
+  firmware_server_port:
+    name: Port an fhreastalaí bogearra dochtain
+    description: >-
+      An port áitiúil a úsáideann an breiseán chun comhaid bhogearra dochtain
+      a sheirbheáil do ghléasanna le linn nuashonrú OTA. Ní mór go mbeadh sé
+      inrochtana ó do ghléasanna IoT.
+  log_level:
+    name: Leibhéal logála
+    description: Mionsonraí aschur logála an bhreiseáin.
