@@ -111,6 +111,29 @@ class DeviceStore:
 
         return self._store.mutate(_do)
 
+    def record_uptime(self, device_id: str, uptime_sec: int) -> Optional[Dict]:
+        """Atomically compare `uptime_sec` against the device's last-known
+        uptime and bump its (best-effort) reboot counter if it dropped, in
+        one locked read-modify-write - this must not be split into a
+        separate get() + update_fields() from the caller, since the regular
+        background poll and an on-demand sensor-popup request can race and
+        each observe the same stale previous value, double-counting the
+        same reboot."""
+        def _do(data):
+            devices = data.setdefault("devices", {})
+            dev = devices.get(device_id)
+            if dev is None:
+                return None
+            prev = dev.get("last_uptime_sec")
+            reboot_count = dev.get("reboot_count") or 0
+            if isinstance(prev, (int, float)) and uptime_sec < prev:
+                reboot_count += 1
+            dev["last_uptime_sec"] = uptime_sec
+            dev["reboot_count"] = reboot_count
+            return dev
+
+        return self._store.mutate(_do)
+
     def delete(self, device_id: str) -> bool:
         def _do(data):
             devices = data.setdefault("devices", {})

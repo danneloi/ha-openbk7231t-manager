@@ -61,6 +61,27 @@ source, src/httpserver/rest_interface.c and src/httpserver/http_basic_auth.c):
   POST http://<ip>/api/reboot          body: (none)
       -> Reboots the device. Used after a successful /api/ota push.
 
+  GET  http://<ip>/api/pins
+      -> JSON: {"rolenames": [...], "roles": [...], "channels": [...],
+                 "channels2": [...]?, "states": [...]}
+      The device's current GPIO pin role/channel mapping - the same data
+      its own built-in "Pins" configuration page reads. "channels2" is
+      only included at all if at least one entry is non-zero (used for a
+      handful of advanced/extended channel mappings, e.g. some dimmers).
+      "states" is the live current channel values, not configuration.
+      Used by config_backup.py to capture a device's configuration.
+
+  POST http://<ip>/api/pins            body: JSON {"roles": [...],
+                                        "channels": [...], "deviceFlag": int,
+                                        "deviceCommand": "<startup cmds>"}
+      -> Applies the given pin roles/channels, sets a device flag, and/or
+         replaces the persisted startup command script (the
+         "autoexec"-equivalent - console commands run on every boot), then
+         saves to flash. Any field can be omitted. "channels2"/"states"
+         are not accepted here - an advanced/extended channel mapping can
+         be backed up via GET but not restored this way.
+      Used by config_backup.py to restore a previously saved configuration.
+
   HTTP Basic Auth: username is always "admin", password is whatever the
   device's web admin password is configured to (empty by default -> no
   auth required at all). Applies to every endpoint above.
@@ -234,6 +255,43 @@ def push_ota(ip: str, firmware_bytes: bytes, password: Optional[str] = None, tim
         return {"ok": False, "status_code": None, "error": str(exc)}
     ok = resp.status_code == 200
     return {"ok": ok, "status_code": resp.status_code, "error": None if ok else f"HTTP {resp.status_code}"}
+
+
+def get_pins(ip: str, password: Optional[str] = None, timeout: float = DEFAULT_TIMEOUT) -> dict:
+    """GET /api/pins - the device's current GPIO pin role/channel mapping.
+
+    Returns {"ok": bool, "error": str|None, "data": dict|None}, where
+    "data" (on success) has the shape described in the module docstring.
+    """
+    url = f"http://{ip}/api/pins"
+    try:
+        resp = requests.get(url, auth=_auth(password), timeout=timeout)
+    except requests.RequestException as exc:
+        return {"ok": False, "error": str(exc), "data": None}
+    if resp.status_code != 200:
+        return {"ok": False, "error": f"HTTP {resp.status_code}", "data": None}
+    try:
+        data = resp.json()
+    except ValueError:
+        return {"ok": False, "error": "Unerwartete Antwort vom Gerät.", "data": None}
+    if not isinstance(data, dict):
+        return {"ok": False, "error": "Unerwartete Antwort vom Gerät.", "data": None}
+    return {"ok": True, "error": None, "data": data}
+
+
+def post_pins(ip: str, payload: dict, password: Optional[str] = None, timeout: float = DEFAULT_TIMEOUT) -> dict:
+    """POST /api/pins - push pin roles/channels and/or a startup command
+    back to the device (see module docstring for accepted fields).
+
+    Returns {"ok": bool, "error": str|None}.
+    """
+    url = f"http://{ip}/api/pins"
+    try:
+        resp = requests.post(url, json=payload, auth=_auth(password), timeout=timeout)
+    except requests.RequestException as exc:
+        return {"ok": False, "error": str(exc)}
+    ok = resp.status_code == 200
+    return {"ok": ok, "error": None if ok else f"HTTP {resp.status_code}"}
 
 
 def reboot(ip: str, password: Optional[str] = None, timeout: float = DEFAULT_TIMEOUT) -> dict:

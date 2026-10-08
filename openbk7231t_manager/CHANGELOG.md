@@ -4,199 +4,29 @@ All notable changes to this add-on are documented here. Format loosely
 follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). More
 detailed explanations for each change are in [DOCS.md](DOCS.md) (German).
 
-## [1.6.0] - 2026-09-29
+## [1.7.1] - 2026-09-30
 
 ### Added
-- Collapsible panels on the main page: click a panel's heading (Devices,
-  Notifications, Settings, Firmware cache) to expand or collapse its
-  content. The "Devices" panel stays open by default; the others start
-  collapsed to keep the page tidy as more features are added. The
-  open/closed state of each panel is remembered (per browser) across
-  reloads.
-- 19 additional UI languages: Bulgarian, Croatian, Czech, Danish, Dutch,
-  Estonian, Finnish, Greek, Hungarian, Irish, Italian, Latvian,
-  Lithuanian, Maltese, Polish, Romanian, Slovak, Slovenian and Swedish -
-  covering all 24 official EU languages alongside the existing German,
-  English, English (US), French, Spanish and Portuguese. Every UI string
-  on both the main page and the "ESPHome ↔ OpenBeken" migration page is
-  translated.
-- Each language in the selector is shown with its flag next to its name.
-- The add-on's Home Assistant Supervisor-level configuration texts
-  (option names/descriptions shown in the Configuration tab) are now
-  also translated into all of the languages above (previously only
-  German and English existed there).
+- The device detail popup's "Diagnose" section now also shows "Zuletzt
+  gesehen" (when the add-on last successfully reached the device) and
+  "Neustarts (geschätzt)" (a best-effort reboot counter). OpenBK7231T_App
+  doesn't track its own reboot count, so this is approximated by noticing
+  whenever the device's reported uptime drops compared to the last check -
+  it can only catch reboots that happen between two checks, so treat it as
+  a lower bound, not an exact count.
 
-## [1.5.0] - 2026-09-28
+## [1.7.0] - 2026-09-30
 
 ### Added
-- New "Firmware cache" panel on the main page for managing the OpenBeken
-  firmware images and UF2 packages downloaded/built for OTA updates and
-  the "ESPHome ↔ OpenBeken" migration page. These were never deleted
-  automatically before and could accumulate over time. Now you can:
-  - See every cached file (type, label, filename, size, date added) and
-    the total size used.
-  - Delete individual files by hand.
-  - Set a maximum cache size (in MB) with automatic cleanup once it's
-    exceeded - the oldest cached files are always removed first, never
-    the most recently downloaded/built ones.
-  - Trigger a cleanup manually at any time ("Clean up now"), independent
-    of the automatic limit.
-
-## [1.4.1] - 2026-09-20
-
-### Fixed
-- The "←" back link on the new "ESPHome ↔ OpenBeken" page led to a "Not
-  Found" error, because the main page is only served at `/` and not at
-  `/index.html`. The link now points to `/` (and `/index.html` also works
-  now as an alias, as a safety net).
-
-### Added
-- Mobile-friendly layout: the top bar, forms, buttons, tables, dialogs and
-  the settings list now adapt to narrow (phone-sized) screens instead of
-  overflowing or requiring horizontal scrolling of the whole page. Tables
-  that are still wider than the screen scroll horizontally on their own,
-  without taking the rest of the page with them.
-
-## [1.4.0] - 2026-09-20
-
-### Added
-- New "ESPHome ↔ OpenBeken" page (linked from the top bar), for migrating a
-  device that was originally flashed with ESPHome over to OpenBK7231T_App
-  and back, entirely over the network:
-  - Build a ready-to-flash `.uf2` firmware package for a chosen chip/module
-    from the current OpenBeken release (using
-    [ltchiptool](https://github.com/libretiny-eu/ltchiptool)), to upload
-    manually through ESPHome's own OTA update page.
-  - Upload an existing ESPHome YAML config to auto-detect its gpio-based
-    switches, buttons and lights, and translate them into the matching
-    OpenBeken `setPinRole`/`setPinChannel` console commands.
-  - Send the generated (or hand-edited) commands directly to a freshly
-    flashed device's IP address.
-  - This only supports the LibreTiny-based chips ltchiptool knows how to
-    package for (BK7231T/N, BK7238, BK7252, LN882H, RTL8710B, RTL8720C/
-    RTL87X0C) - the page never flashes a device on its own, and the exact
-    chip/board always has to be picked by hand to avoid guessing wrong.
-
-## [1.3.3] - 2026-09-17
-
-### Added
-- The release badge in the top bar ("Release: x.y.z") is now clickable and
-  shows the full release notes (highlights, published date) in a popup,
-  with a link to the release on GitHub.
-- A GitHub icon in the top bar links directly to the official
-  [OpenBK7231T_App](https://github.com/openshwprojects/OpenBK7231T_App)
-  repository.
-
-## [1.3.2] - 2026-09-06
-
-### Fixed
-- The add-on's web server showed the warning "WARNING: This is a
-  development server. Do not use it in a production deployment. Use a
-  production WSGI server instead." on startup. It now uses
-  [waitress](https://github.com/Pylons/waitress), a production-ready
-  WSGI server, instead of Flask's built-in development server. This is
-  purely an internal change - nothing about how the add-on works or
-  looks changes.
-
-## [1.3.1] - 2026-09-05
-
-### Fixed
-- The "Notifications" section stayed in German when switching the UI
-  language. It's now translated consistently along with the rest of the
-  UI.
-
-### Changed
-- Anonymized the example name in the notification channel form ("e.g.
-  Alex's phone" instead of a real name).
-- Repository is now GitHub-ready: added `repository.yaml`, a root
-  `README.md`, a `LICENSE`, an add-on icon/logo, and a few preview
-  screenshots, so it can be added directly as a Home Assistant add-on
-  repository.
-
-## [1.3.0] - 2026-09-05
-
-### Added
-- Multi-language UI (German, English, English (US), French, Spanish,
-  Portuguese) with a language switcher in the top bar.
-- Sensor detail view grouped into categories (Wi-Fi connection, power
-  consumption, diagnostics, environment); both the device name and
-  individual sensor labels can now be renamed.
-- Button to open a device directly in a new browser tab.
-- Color-coded RSSI signal quality (green/orange/red).
-
-### Changed
-- Sensor values are now rounded to 2 decimal places everywhere they're
-  displayed.
-- The Actions column now uses icons (sync/trash) instead of text buttons.
-- Settings are now shown compactly side by side instead of as a stacked
-  tile list.
-
-### Fixed
-- The "Update all" banner stayed visible due to a CSS conflict even after
-  no update was pending anymore.
-
-## [1.2.0] - 2026-09-05
-
-### Changed
-- Firmware updates are now pushed directly (`POST /api/ota`) instead of
-  just telling the device a URL to download from; the previous
-  `ota_http`-based mechanism is kept as a fallback.
-
-### Fixed
-- A real firmware bug on RTL87X0C ("Realtek Ameba") chips corrupted the
-  target IP address during `ota_http` URL parsing, breaking reliable
-  network updates.
-
-## [1.1.4] - 2026-09-05
-
-### Added
-- The firmware URL used for an update is now logged when the update
-  starts.
-
-## [1.1.3] - 2026-09-05
-
-### Added
-- Tapping/clicking the "Timed out"/"Failed" status now also shows the
-  exact error message as a popup (not just as a hover tooltip).
-- More detailed log entries for update failures.
-
-## [1.1.2] - 2026-09-05
-
-### Fixed
-- An update could end in "Timed out" even though the device had accepted
-  the command but never actually started updating. The add-on now detects
-  this within 45 seconds and fails fast with a clear error message
-  instead of waiting the full 4 minutes.
-
-## [1.1.1] - 2026-09-05
-
-### Fixed
-- "Could not load sensor data: HTTP 400" on some devices, by switching to
-  the firmware's more reliable `/cm` endpoint.
-- Sensor data was looked up in the wrong place for some responses and
-  incorrectly reported as "not available".
-
-## [1.1.0] - 2026-09-05
-
-### Added
-- Dark mode (follows the system setting, with a manual toggle).
-- Device detail view with live sensor data.
-- Notification channels: Home Assistant, Telegram, WhatsApp.
-
-### Fixed
-- The "Firmware update" button appeared disabled/unresponsive when no
-  newer version was known.
-
-## [1.0.1] - 2026-09-05
-
-### Fixed
-- The web UI port is now assigned automatically by the Supervisor instead
-  of being hardcoded to 8099 (avoided port conflicts with
-  `host_network: true`).
-- Removed deprecated 32-bit architectures from the add-on configuration.
-
-## [1.0.0] - 2026-09-05
-
-### Added
-- Initial release: device list, network scan, manual add, OTA firmware
-  updates, Home Assistant notification on new releases.
+- New "Configuration backups" panel on the main page. Before every
+  firmware update, the add-on now automatically saves the device's GPIO
+  pin/channel mapping and startup command script ("autoexec" script) to
+  a backup, so an update that resets or corrupts the configuration can
+  be undone. You can also trigger a backup manually at any time from a
+  device's row (the new save icon) or from the panel itself.
+  - Each device keeps its 20 most recent backups; older ones are
+    removed automatically.
+  - Restore a backup back to the device with one click, download it as
+    a JSON file, or delete it.
+  - A failed backup attempt (e.g. the device is offline) never blocks
+    or fails the update itself - it's purely a best-effort safety net.

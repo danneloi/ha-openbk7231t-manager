@@ -45,6 +45,11 @@ A Home Assistant **add-on** (not a custom integration) for managing
   UF2 packages are listed with their size, can be deleted individually,
   and can be auto-pruned (oldest first) once a configurable size limit is
   exceeded, so they don't just accumulate forever.
+- **Configuration backups**: before every firmware update, the device's
+  GPIO pin/channel mapping and startup command script are automatically
+  backed up, so a bad update can be undone. Backups can also be
+  triggered manually, restored, downloaded, or deleted from the new
+  "Configuration backups" panel - the last 20 per device are kept.
 
 ## Screenshots
 

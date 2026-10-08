@@ -203,6 +203,39 @@
       <p id="cache-settings-status" class="muted"></p>
       </div>
     </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <button type="button" class="panel-toggle" data-panel-key="backups" aria-expanded="false">
+          <span class="panel-chevron" aria-hidden="true">▸</span>
+          <h2 data-i18n="backupsHeader">Konfigurations-Backups</h2>
+        </button>
+      </div>
+      <div class="panel-body" hidden>
+      <p class="muted" data-i18n="backupsIntro">
+        Sichert vor jedem Update automatisch die GPIO-Pin-/Kanal-Zuordnung und
+        das Startbefehl-Skript eines Geräts, damit du ein Update rückgängig
+        machen kannst, das die Konfiguration zurücksetzt oder beschädigt. Du
+        kannst unten auch jederzeit manuell ein Backup für ein Gerät auslösen.
+      </p>
+      <div class="table-scroll">
+        <table class="device-table">
+          <thead>
+            <tr>
+              <th data-i18n="backupColDevice">Gerät</th>
+              <th data-i18n="backupColTime">Zeitpunkt</th>
+              <th data-i18n="backupColReason">Anlass</th>
+              <th data-i18n="backupColVersion">Firmware</th>
+              <th data-i18n="colActions">Aktionen</th>
+            </tr>
+          </thead>
+          <tbody id="backup-rows">
+            <tr><td colspan="5" class="empty-row" data-i18n="backupEmpty">Noch keine Backups vorhanden.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </section>
   </main>
 
   <div id="sensor-modal-overlay" class="modal-overlay" hidden>

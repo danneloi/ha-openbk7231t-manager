@@ -13,6 +13,7 @@ from waitress import serve as waitress_serve
 
 import cache_manager
 import config as cfgmod
+import config_backup
 import discovery
 import github_release
 import ha_notify
@@ -57,6 +58,7 @@ app_state = storemod.AppState(settings.data_dir)
 notification_store = storemod.NotificationStore(settings.data_dir)
 FIRMWARE_CACHE_DIR = os.path.join(settings.data_dir, "firmware")
 MIGRATE_UF2_CACHE_DIR = os.path.join(settings.data_dir, "migrate_uf2")
+CONFIG_BACKUP_DIR = os.path.join(settings.data_dir, "config_backups")
 
 UPDATE_POLL_INTERVAL_S = 5
 UPDATE_TIMEOUT_S = 240  # give a device up to 4 minutes to come back after OTA
@@ -225,6 +227,27 @@ def _maybe_auto_cleanup() -> None:
         )
 
 
+def _track_reboot(dev: dict, uptime_sec) -> None:
+    """Best-effort reboot counter: OpenBK7231T_App doesn't persist a reboot
+    count of its own, so we approximate one by watching for the device's
+    reported uptime dropping compared to what we last saw - a lower uptime
+    than before means it restarted at some point between the two
+    observations. This can only catch reboots that happen between two of our
+    own checks (a reboot-then-reboot-again inside one polling interval isn't
+    counted separately), so treat it as a lower bound, not an exact count.
+    The compare-and-increment happens atomically in the store (see
+    DeviceStore.record_uptime) so a concurrent background poll and an
+    on-demand sensor-popup request can't each observe the same stale
+    previous value and double-count the same reboot."""
+    if uptime_sec is None:
+        return
+    try:
+        uptime_sec = int(uptime_sec)
+    except (TypeError, ValueError):
+        return
+    device_store.record_uptime(dev["id"], uptime_sec)
+
+
 def _poll_device_once(dev: dict) -> None:
     info = obk_client.get_info(dev["ip"], password=dev.get("password"))
     if info is None:
@@ -250,6 +273,14 @@ def _poll_device_once(dev: dict) -> None:
             device_store.delete(dev["id"])
             return
     device_store.update_fields(dev["id"], **fields)
+    # Piggyback a lightweight status query onto the regular poll so the
+    # reboot counter (and the device's last-known uptime) stay up to date
+    # even if nobody ever opens its sensor detail popup.
+    sensor_result = obk_client.get_sensor_status(dev["ip"], password=dev.get("password"))
+    if sensor_result.get("ok"):
+        uptime_sensor = sensor_result["sensors"].get("uptime_sec")
+        if uptime_sensor:
+            _track_reboot(dev, uptime_sensor.get("value"))
 
 
 def _watch_update(
@@ -363,6 +394,20 @@ def _watch_update(
 
 
 def _start_update(dev: dict, release: github_release.ReleaseInfo) -> dict:
+    # Best-effort: snapshot the device's current pin/channel config and
+    # startup command before touching its firmware, so a botched update
+    # (or one that resets settings) can be recovered from. Never blocks or
+    # fails the update itself - a device that's unreachable for this quick
+    # read/write-free GET is about to fail the OTA anyway, and one that
+    # merely doesn't support /api/pins (very old firmware) shouldn't be
+    # prevented from updating just because we can't back it up yet.
+    try:
+        config_backup.create_backup(CONFIG_BACKUP_DIR, dev, reason=config_backup.REASON_PRE_UPDATE)
+    except config_backup.BackupError as exc:
+        log.warning("Automatic pre-update config backup for %s (%s) skipped: %s", dev["id"], dev["ip"], exc)
+    except Exception:  # noqa: BLE001
+        log.exception("Unexpected error during automatic pre-update config backup for %s", dev["id"])
+
     chipset = dev.get("chipset")
     filename = github_release.ota_asset_filename(chipset, release.tag_name)
     if not filename:
@@ -618,6 +663,29 @@ def api_device_sensors(device_id):
     result = obk_client.get_sensor_status(dev["ip"], password=dev.get("password"))
     if not result["ok"]:
         return jsonify({"error": result["error"], "sensors": {}}), 502
+    uptime_sensor = result["sensors"].get("uptime_sec")
+    if uptime_sensor:
+        _track_reboot(dev, uptime_sensor.get("value"))
+        dev = device_store.get(device_id) or dev
+    # "Neustarts"/"Zuletzt gesehen" aren't live device readings - they come
+    # from our own persisted device record - but are shown as regular
+    # diagnostics cards alongside the live ones for a single combined view.
+    result["sensors"]["reboot_count"] = {
+        "label": "Neustarts (geschätzt)",
+        "value": dev.get("reboot_count") or 0,
+        "unit": None,
+        "category": "diagnostics",
+        "custom": False,
+    }
+    if dev.get("last_seen"):
+        result["sensors"]["last_seen"] = {
+            "label": "Zuletzt gesehen",
+            "value": dev.get("last_seen"),
+            "unit": None,
+            "category": "diagnostics",
+            "custom": False,
+            "is_timestamp": True,
+        }
     overrides = dev.get("sensor_label_overrides") or {}
     for key, custom_label in overrides.items():
         if key in result["sensors"] and custom_label:
@@ -873,6 +941,70 @@ def api_cache_cleanup():
         "entries": [_cache_entry_dict(e) for e in entries],
         "total_bytes": cache_manager.total_size(entries),
     })
+
+
+def _backup_entry_dict(entry: dict) -> dict:
+    return {
+        "id": entry.get("id"),
+        "device_id": entry.get("device_id"),
+        "device_name": entry.get("device_name"),
+        "ip": entry.get("ip"),
+        "created_at": entry.get("created_at"),
+        "reason": entry.get("reason"),
+        "chipset": entry.get("chipset"),
+        "version": entry.get("version"),
+        "pin_count": len(entry.get("roles") or []),
+        "has_channels2": bool(entry.get("channels2")),
+        "has_device_command": bool(entry.get("device_command")),
+    }
+
+
+@ui_app.get("/api/backups")
+def api_list_backups():
+    entries = config_backup.list_all_backups(CONFIG_BACKUP_DIR)
+    return jsonify({"entries": [_backup_entry_dict(e) for e in entries]})
+
+
+@ui_app.post("/api/devices/<device_id>/backups")
+def api_create_backup(device_id):
+    dev = device_store.get(device_id)
+    if not dev:
+        return jsonify({"error": "Gerät nicht gefunden"}), 404
+    try:
+        entry = config_backup.create_backup(CONFIG_BACKUP_DIR, dev, reason=config_backup.REASON_MANUAL)
+    except config_backup.BackupError as exc:
+        return jsonify({"error": str(exc)}), 502
+    return jsonify({"ok": True, "entry": _backup_entry_dict(entry)}), 201
+
+
+@ui_app.post("/api/backups/<device_id>/<backup_id>/restore")
+def api_restore_backup(device_id, backup_id):
+    dev = device_store.get(device_id)
+    if not dev:
+        return jsonify({"error": "Gerät nicht gefunden"}), 404
+    entry = config_backup.get_backup(CONFIG_BACKUP_DIR, device_id, backup_id)
+    if not entry:
+        return jsonify({"error": "Backup nicht gefunden."}), 404
+    result = config_backup.restore_backup(dev["ip"], dev.get("password"), entry)
+    if not result.get("ok"):
+        return jsonify({"error": result.get("error") or "Wiederherstellung fehlgeschlagen."}), 502
+    return jsonify({"ok": True})
+
+
+@ui_app.post("/api/backups/<device_id>/<backup_id>/delete")
+def api_delete_backup(device_id, backup_id):
+    ok = config_backup.delete_backup(CONFIG_BACKUP_DIR, device_id, backup_id)
+    return jsonify({"ok": ok}), (200 if ok else 404)
+
+
+@ui_app.get("/api/backups/<device_id>/<backup_id>/download")
+def api_download_backup(device_id, backup_id):
+    entry = config_backup.get_backup(CONFIG_BACKUP_DIR, device_id, backup_id)
+    if not entry:
+        return jsonify({"error": "Backup nicht gefunden."}), 404
+    resp = jsonify(entry)
+    resp.headers["Content-Disposition"] = f'attachment; filename="obk-backup_{device_id}_{backup_id}.json"'
+    return resp
 
 
 @ui_app.get("/api/scan")

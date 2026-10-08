@@ -282,6 +282,26 @@
       notifActiveLabel: "Aktiv",
       notifKeepUnchanged: "•••• (unverändert lassen zum Beibehalten)",
       notifApikeyPlaceholderExample: "z. B. 123456",
+      backupsHeader: "Konfigurations-Backups",
+      backupsIntro: "Sichert vor jedem Update automatisch die GPIO-Pin-/Kanal-Zuordnung und das Startbefehl-Skript eines Geräts, damit du ein Update rückgängig machen kannst, das die Konfiguration zurücksetzt oder beschädigt. Du kannst unten auch jederzeit manuell ein Backup für ein Gerät auslösen.",
+      backupColDevice: "Gerät",
+      backupColTime: "Zeitpunkt",
+      backupColReason: "Anlass",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manuell",
+      backupReasonPreUpdate: "Vor Update",
+      backupEmpty: "Noch keine Backups vorhanden.",
+      backupNowTitle: "Konfiguration jetzt sichern",
+      backupRestoreTitle: "Diese Konfiguration wiederherstellen",
+      backupDownloadTitle: "Backup herunterladen",
+      backupConfirmRestore: "Diese Konfiguration wirklich auf dem Gerät wiederherstellen? Die aktuellen Pin-/Kanal-Einstellungen und der Startbefehl werden überschrieben.",
+      backupAlertRestoreFailed: "Wiederherstellung fehlgeschlagen: {msg}",
+      backupRestoredAlert: "Konfiguration wiederhergestellt.",
+      backupConfirmDelete: "Dieses Backup wirklich löschen?",
+      backupAlertDeleteFailed: "Löschen fehlgeschlagen: {msg}",
+      backupAlertCreateFailed: "Backup fehlgeschlagen: {msg}",
+      sensor_reboot_count: "Neustarts (geschätzt)",
+      sensor_last_seen: "Zuletzt gesehen",
     },
     en: {
       checkRelease: "Check for updates",
@@ -448,6 +468,26 @@
       notifActiveLabel: "Active",
       notifKeepUnchanged: "•••• (leave unchanged to keep it)",
       notifApikeyPlaceholderExample: "e.g. 123456",
+      backupsHeader: "Configuration Backups",
+      backupsIntro: "Automatically saves a device's GPIO pin/channel mapping and startup command script before every update, so you can undo an update that resets or corrupts its configuration. You can also trigger a backup manually for any device below.",
+      backupColDevice: "Device",
+      backupColTime: "Time",
+      backupColReason: "Reason",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manual",
+      backupReasonPreUpdate: "Before update",
+      backupEmpty: "No backups yet.",
+      backupNowTitle: "Back up configuration now",
+      backupRestoreTitle: "Restore this configuration",
+      backupDownloadTitle: "Download backup",
+      backupConfirmRestore: "Really restore this configuration to the device? Its current pin/channel settings and startup command will be overwritten.",
+      backupAlertRestoreFailed: "Restore failed: {msg}",
+      backupRestoredAlert: "Configuration restored.",
+      backupConfirmDelete: "Really delete this backup?",
+      backupAlertDeleteFailed: "Delete failed: {msg}",
+      backupAlertCreateFailed: "Backup failed: {msg}",
+      sensor_reboot_count: "Reboots (estimated)",
+      sensor_last_seen: "Last seen",
     },
     fr: {
       checkRelease: "Vérifier les mises à jour",
@@ -614,6 +654,26 @@
       notifActiveLabel: "Actif",
       notifKeepUnchanged: "•••• (laisser inchangé pour conserver)",
       notifApikeyPlaceholderExample: "p. ex. 123456",
+      backupsHeader: "Sauvegardes de configuration",
+      backupsIntro: "Enregistre automatiquement l'affectation des broches/canaux GPIO et le script de commande de démarrage d'un appareil avant chaque mise à jour, afin de pouvoir annuler une mise à jour qui réinitialise ou corrompt sa configuration. Vous pouvez aussi déclencher une sauvegarde manuellement pour n'importe quel appareil ci-dessous.",
+      backupColDevice: "Appareil",
+      backupColTime: "Horodatage",
+      backupColReason: "Motif",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manuel",
+      backupReasonPreUpdate: "Avant mise à jour",
+      backupEmpty: "Aucune sauvegarde pour le moment.",
+      backupNowTitle: "Sauvegarder la configuration maintenant",
+      backupRestoreTitle: "Restaurer cette configuration",
+      backupDownloadTitle: "Télécharger la sauvegarde",
+      backupConfirmRestore: "Vraiment restaurer cette configuration sur l'appareil ? Les réglages actuels des broches/canaux et la commande de démarrage seront écrasés.",
+      backupAlertRestoreFailed: "Échec de la restauration : {msg}",
+      backupRestoredAlert: "Configuration restaurée.",
+      backupConfirmDelete: "Vraiment supprimer cette sauvegarde ?",
+      backupAlertDeleteFailed: "Échec de la suppression : {msg}",
+      backupAlertCreateFailed: "Échec de la sauvegarde : {msg}",
+      sensor_reboot_count: "Redémarrages (estimé)",
+      sensor_last_seen: "Vu pour la dernière fois",
     },
     es: {
       checkRelease: "Buscar actualizaciones",
@@ -780,6 +840,26 @@
       notifActiveLabel: "Activo",
       notifKeepUnchanged: "•••• (dejar sin cambios para mantenerla)",
       notifApikeyPlaceholderExample: "p. ej. 123456",
+      backupsHeader: "Copias de seguridad de configuración",
+      backupsIntro: "Guarda automáticamente la asignación de pines/canales GPIO y el script de comandos de inicio de un dispositivo antes de cada actualización, para poder deshacer una actualización que restablezca o dañe su configuración. También puedes crear una copia de seguridad manualmente para cualquier dispositivo a continuación.",
+      backupColDevice: "Dispositivo",
+      backupColTime: "Fecha y hora",
+      backupColReason: "Motivo",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manual",
+      backupReasonPreUpdate: "Antes de actualizar",
+      backupEmpty: "Todavía no hay copias de seguridad.",
+      backupNowTitle: "Guardar copia de seguridad ahora",
+      backupRestoreTitle: "Restaurar esta configuración",
+      backupDownloadTitle: "Descargar copia de seguridad",
+      backupConfirmRestore: "¿Restaurar realmente esta configuración en el dispositivo? Se sobrescribirán los ajustes actuales de pines/canales y el comando de inicio.",
+      backupAlertRestoreFailed: "Error al restaurar: {msg}",
+      backupRestoredAlert: "Configuración restaurada.",
+      backupConfirmDelete: "¿Eliminar realmente esta copia de seguridad?",
+      backupAlertDeleteFailed: "Error al eliminar: {msg}",
+      backupAlertCreateFailed: "Error al crear la copia de seguridad: {msg}",
+      sensor_reboot_count: "Reinicios (estimado)",
+      sensor_last_seen: "Visto por última vez",
     },
     pt: {
       checkRelease: "Verificar atualizações",
@@ -946,6 +1026,26 @@
       notifActiveLabel: "Ativo",
       notifKeepUnchanged: "•••• (deixar sem alterar para manter)",
       notifApikeyPlaceholderExample: "p. ex. 123456",
+      backupsHeader: "Cópias de segurança da configuração",
+      backupsIntro: "Guarda automaticamente o mapeamento de pinos/canais GPIO e o script de comandos de arranque de um dispositivo antes de cada atualização, para que possas anular uma atualização que reponha ou corrompa a sua configuração. Também podes criar uma cópia de segurança manualmente para qualquer dispositivo abaixo.",
+      backupColDevice: "Dispositivo",
+      backupColTime: "Data/hora",
+      backupColReason: "Motivo",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manual",
+      backupReasonPreUpdate: "Antes da atualização",
+      backupEmpty: "Ainda não há cópias de segurança.",
+      backupNowTitle: "Criar cópia de segurança agora",
+      backupRestoreTitle: "Restaurar esta configuração",
+      backupDownloadTitle: "Transferir cópia de segurança",
+      backupConfirmRestore: "Restaurar mesmo esta configuração no dispositivo? As definições atuais de pinos/canais e o comando de arranque serão substituídos.",
+      backupAlertRestoreFailed: "Falha ao restaurar: {msg}",
+      backupRestoredAlert: "Configuração restaurada.",
+      backupConfirmDelete: "Eliminar mesmo esta cópia de segurança?",
+      backupAlertDeleteFailed: "Falha ao eliminar: {msg}",
+      backupAlertCreateFailed: "Falha ao criar a cópia de segurança: {msg}",
+      sensor_reboot_count: "Reinicializações (estimado)",
+      sensor_last_seen: "Visto pela última vez",
     },
     bg: {
       checkRelease: "Проверка за актуализации",
@@ -1117,6 +1217,26 @@
       notifActiveLabel: "Активен",
       notifKeepUnchanged: "•••• (оставете непроменено, за да го запазите)",
       notifApikeyPlaceholderExample: "напр. 123456",
+      backupsHeader: "Резервни копия на конфигурацията",
+      backupsIntro: "Автоматично запазва съответствието на GPIO пиновете/каналите и стартовия команден скрипт на устройството преди всяка актуализация, за да можеш да отмениш актуализация, която нулира или поврежда конфигурацията му. По-долу можеш и ръчно да стартираш резервно копие за произволно устройство.",
+      backupColDevice: "Устройство",
+      backupColTime: "Час",
+      backupColReason: "Причина",
+      backupColVersion: "Фърмуер",
+      backupReasonManual: "Ръчно",
+      backupReasonPreUpdate: "Преди актуализация",
+      backupEmpty: "Все още няма резервни копия.",
+      backupNowTitle: "Направи резервно копие сега",
+      backupRestoreTitle: "Възстанови тази конфигурация",
+      backupDownloadTitle: "Изтегли резервното копие",
+      backupConfirmRestore: "Наистина ли да се възстанови тази конфигурация на устройството? Текущите настройки на пиновете/каналите и стартовата команда ще бъдат презаписани.",
+      backupAlertRestoreFailed: "Възстановяването бе неуспешно: {msg}",
+      backupRestoredAlert: "Конфигурацията е възстановена.",
+      backupConfirmDelete: "Наистина ли да се изтрие това резервно копие?",
+      backupAlertDeleteFailed: "Изтриването бе неуспешно: {msg}",
+      backupAlertCreateFailed: "Резервното копиране бе неуспешно: {msg}",
+      sensor_reboot_count: "Рестартирания (приблизително)",
+      sensor_last_seen: "Последно видяно",
     },
     hr: {
       checkRelease: "Provjeri ažuriranja",
@@ -1288,6 +1408,26 @@
       notifActiveLabel: "Aktivan",
       notifKeepUnchanged: "•••• (ostavite nepromijenjeno da ga zadržite)",
       notifApikeyPlaceholderExample: "npr. 123456",
+      backupsHeader: "Sigurnosne kopije konfiguracije",
+      backupsIntro: "Automatski sprema raspored GPIO pinova/kanala i skriptu naredbi za pokretanje uređaja prije svakog ažuriranja, kako biste mogli poništiti ažuriranje koje resetira ili ošteti njegovu konfiguraciju. Sigurnosnu kopiju možete pokrenuti i ručno za bilo koji uređaj u nastavku.",
+      backupColDevice: "Uređaj",
+      backupColTime: "Vrijeme",
+      backupColReason: "Razlog",
+      backupColVersion: "Firmver",
+      backupReasonManual: "Ručno",
+      backupReasonPreUpdate: "Prije ažuriranja",
+      backupEmpty: "Još nema sigurnosnih kopija.",
+      backupNowTitle: "Izradi sigurnosnu kopiju sada",
+      backupRestoreTitle: "Vrati ovu konfiguraciju",
+      backupDownloadTitle: "Preuzmi sigurnosnu kopiju",
+      backupConfirmRestore: "Zaista vratiti ovu konfiguraciju na uređaj? Trenutne postavke pinova/kanala i naredba za pokretanje bit će prepisane.",
+      backupAlertRestoreFailed: "Vraćanje nije uspjelo: {msg}",
+      backupRestoredAlert: "Konfiguracija je vraćena.",
+      backupConfirmDelete: "Zaista izbrisati ovu sigurnosnu kopiju?",
+      backupAlertDeleteFailed: "Brisanje nije uspjelo: {msg}",
+      backupAlertCreateFailed: "Izrada sigurnosne kopije nije uspjela: {msg}",
+      sensor_reboot_count: "Ponovna pokretanja (procjena)",
+      sensor_last_seen: "Zadnje viđeno",
     },
     cs: {
       checkRelease: "Zkontrolovat aktualizace",
@@ -1459,6 +1599,26 @@
       notifActiveLabel: "Aktivní",
       notifKeepUnchanged: "•••• (ponechte beze změny, chcete-li ho zachovat)",
       notifApikeyPlaceholderExample: "např. 123456",
+      backupsHeader: "Zálohy konfigurace",
+      backupsIntro: "Před každou aktualizací automaticky uloží mapování GPIO pinů/kanálů a skript spouštěcích příkazů zařízení, abyste mohli vrátit zpět aktualizaci, která resetuje nebo poškodí jeho konfiguraci. Zálohu můžete kdykoli spustit i ručně pro libovolné zařízení níže.",
+      backupColDevice: "Zařízení",
+      backupColTime: "Čas",
+      backupColReason: "Důvod",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Ručně",
+      backupReasonPreUpdate: "Před aktualizací",
+      backupEmpty: "Zatím žádné zálohy.",
+      backupNowTitle: "Zálohovat konfiguraci nyní",
+      backupRestoreTitle: "Obnovit tuto konfiguraci",
+      backupDownloadTitle: "Stáhnout zálohu",
+      backupConfirmRestore: "Opravdu obnovit tuto konfiguraci na zařízení? Aktuální nastavení pinů/kanálů a spouštěcí příkaz budou přepsány.",
+      backupAlertRestoreFailed: "Obnovení selhalo: {msg}",
+      backupRestoredAlert: "Konfigurace byla obnovena.",
+      backupConfirmDelete: "Opravdu smazat tuto zálohu?",
+      backupAlertDeleteFailed: "Smazání selhalo: {msg}",
+      backupAlertCreateFailed: "Zálohování selhalo: {msg}",
+      sensor_reboot_count: "Restarty (odhad)",
+      sensor_last_seen: "Naposledy viděno",
     },
     da: {
       checkRelease: "Søg efter opdateringer",
@@ -1630,6 +1790,26 @@
       notifActiveLabel: "Aktiv",
       notifKeepUnchanged: "•••• (lad stå uændret for at beholde den)",
       notifApikeyPlaceholderExample: "f.eks. 123456",
+      backupsHeader: "Konfigurationsbackup",
+      backupsIntro: "Gemmer automatisk enhedens GPIO-pin-/kanaltilknytning og opstartskommando-script før hver opdatering, så du kan fortryde en opdatering, der nulstiller eller ødelægger dens konfiguration. Du kan også oprette en backup manuelt for enhver enhed nedenfor.",
+      backupColDevice: "Enhed",
+      backupColTime: "Tidspunkt",
+      backupColReason: "Årsag",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manuel",
+      backupReasonPreUpdate: "Før opdatering",
+      backupEmpty: "Ingen backupper endnu.",
+      backupNowTitle: "Sikkerhedskopiér konfiguration nu",
+      backupRestoreTitle: "Gendan denne konfiguration",
+      backupDownloadTitle: "Download backup",
+      backupConfirmRestore: "Vil du virkelig gendanne denne konfiguration på enheden? De nuværende pin-/kanalindstillinger og opstartskommandoen bliver overskrevet.",
+      backupAlertRestoreFailed: "Gendannelse mislykkedes: {msg}",
+      backupRestoredAlert: "Konfiguration gendannet.",
+      backupConfirmDelete: "Vil du virkelig slette denne backup?",
+      backupAlertDeleteFailed: "Sletning mislykkedes: {msg}",
+      backupAlertCreateFailed: "Backup mislykkedes: {msg}",
+      sensor_reboot_count: "Genstarter (estimeret)",
+      sensor_last_seen: "Sidst set",
     },
     nl: {
       checkRelease: "Controleren op updates",
@@ -1801,6 +1981,26 @@
       notifActiveLabel: "Actief",
       notifKeepUnchanged: "•••• (laat ongewijzigd om te behouden)",
       notifApikeyPlaceholderExample: "bijv. 123456",
+      backupsHeader: "Configuratiebackups",
+      backupsIntro: "Slaat automatisch de GPIO-pin-/kanaaltoewijzing en het opstartcommando-script van een apparaat op vóór elke update, zodat je een update die de configuratie reset of beschadigt ongedaan kunt maken. Je kunt hieronder ook handmatig een back-up maken voor elk apparaat.",
+      backupColDevice: "Apparaat",
+      backupColTime: "Tijdstip",
+      backupColReason: "Reden",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Handmatig",
+      backupReasonPreUpdate: "Vóór update",
+      backupEmpty: "Nog geen back-ups.",
+      backupNowTitle: "Configuratie nu back-uppen",
+      backupRestoreTitle: "Deze configuratie herstellen",
+      backupDownloadTitle: "Back-up downloaden",
+      backupConfirmRestore: "Deze configuratie echt terugzetten op het apparaat? De huidige pin-/kanaalinstellingen en het opstartcommando worden overschreven.",
+      backupAlertRestoreFailed: "Herstellen mislukt: {msg}",
+      backupRestoredAlert: "Configuratie hersteld.",
+      backupConfirmDelete: "Deze back-up echt verwijderen?",
+      backupAlertDeleteFailed: "Verwijderen mislukt: {msg}",
+      backupAlertCreateFailed: "Back-up maken mislukt: {msg}",
+      sensor_reboot_count: "Herstarts (geschat)",
+      sensor_last_seen: "Laatst gezien",
     },
     et: {
       checkRelease: "Kontrolli värskendusi",
@@ -1972,6 +2172,26 @@
       notifActiveLabel: "Aktiivne",
       notifKeepUnchanged: "•••• (jäta muutmata, et see säiliks)",
       notifApikeyPlaceholderExample: "nt 123456",
+      backupsHeader: "Seadistuse varukoopiad",
+      backupsIntro: "Salvestab enne iga uuendust automaatselt seadme GPIO-viikude/kanalite vastenduse ja käivitusskripti, et saaksid tühistada uuenduse, mis lähtestab või rikub selle seadistuse. Varukoopia saab allpool luua ka käsitsi mis tahes seadme jaoks.",
+      backupColDevice: "Seade",
+      backupColTime: "Aeg",
+      backupColReason: "Põhjus",
+      backupColVersion: "Püsivara",
+      backupReasonManual: "Käsitsi",
+      backupReasonPreUpdate: "Enne uuendust",
+      backupEmpty: "Varukoopiaid pole veel.",
+      backupNowTitle: "Salvesta seadistus praegu",
+      backupRestoreTitle: "Taasta see seadistus",
+      backupDownloadTitle: "Laadi varukoopia alla",
+      backupConfirmRestore: "Kas taastada see seadistus tõesti seadmesse? Praegused viigu-/kanaliseaded ja käivituskäsk kirjutatakse üle.",
+      backupAlertRestoreFailed: "Taastamine ebaõnnestus: {msg}",
+      backupRestoredAlert: "Seadistus taastatud.",
+      backupConfirmDelete: "Kas see varukoopia tõesti kustutada?",
+      backupAlertDeleteFailed: "Kustutamine ebaõnnestus: {msg}",
+      backupAlertCreateFailed: "Varundamine ebaõnnestus: {msg}",
+      sensor_reboot_count: "Taaskäivitused (hinnanguline)",
+      sensor_last_seen: "Viimati nähtud",
     },
     fi: {
       checkRelease: "Tarkista päivitykset",
@@ -2143,6 +2363,26 @@
       notifActiveLabel: "Aktiivinen",
       notifKeepUnchanged: "•••• (jätä muuttamatta säilyttääksesi sen)",
       notifApikeyPlaceholderExample: "esim. 123456",
+      backupsHeader: "Asetusten varmuuskopiot",
+      backupsIntro: "Tallentaa automaattisesti laitteen GPIO-nastojen/kanavien vastaavuudet ja käynnistyskomentoskriptin ennen jokaista päivitystä, jotta voit peruuttaa päivityksen, joka nollaa tai vioittaa sen asetukset. Voit myös luoda varmuuskopion manuaalisesti millä tahansa alla olevalla laitteella.",
+      backupColDevice: "Laite",
+      backupColTime: "Ajankohta",
+      backupColReason: "Syy",
+      backupColVersion: "Laiteohjelmisto",
+      backupReasonManual: "Manuaalinen",
+      backupReasonPreUpdate: "Ennen päivitystä",
+      backupEmpty: "Ei vielä varmuuskopioita.",
+      backupNowTitle: "Varmuuskopioi asetukset nyt",
+      backupRestoreTitle: "Palauta tämä asetus",
+      backupDownloadTitle: "Lataa varmuuskopio",
+      backupConfirmRestore: "Palautetaanko tämä asetus todella laitteeseen? Nykyiset nasta-/kanava-asetukset ja käynnistyskomento korvataan.",
+      backupAlertRestoreFailed: "Palautus epäonnistui: {msg}",
+      backupRestoredAlert: "Asetukset palautettu.",
+      backupConfirmDelete: "Poistetaanko tämä varmuuskopio todella?",
+      backupAlertDeleteFailed: "Poisto epäonnistui: {msg}",
+      backupAlertCreateFailed: "Varmuuskopiointi epäonnistui: {msg}",
+      sensor_reboot_count: "Uudelleenkäynnistykset (arvio)",
+      sensor_last_seen: "Viimeksi nähty",
     },
     el: {
       checkRelease: "Έλεγχος για ενημερώσεις",
@@ -2314,6 +2554,26 @@
       notifActiveLabel: "Ενεργό",
       notifKeepUnchanged: "•••• (αφήστε το αμετάβλητο για να το διατηρήσετε)",
       notifApikeyPlaceholderExample: "π.χ. 123456",
+      backupsHeader: "Αντίγραφα ασφαλείας διαμόρφωσης",
+      backupsIntro: "Αποθηκεύει αυτόματα την αντιστοίχιση ακροδεκτών/καναλιών GPIO και το σενάριο εντολών εκκίνησης μιας συσκευής πριν από κάθε ενημέρωση, ώστε να μπορείτε να αναιρέσετε μια ενημέρωση που επαναφέρει ή καταστρέφει τη διαμόρφωσή της. Μπορείτε επίσης να δημιουργήσετε αντίγραφο ασφαλείας χειροκίνητα για οποιαδήποτε συσκευή παρακάτω.",
+      backupColDevice: "Συσκευή",
+      backupColTime: "Ώρα",
+      backupColReason: "Αιτία",
+      backupColVersion: "Υλικολογισμικό",
+      backupReasonManual: "Χειροκίνητα",
+      backupReasonPreUpdate: "Πριν την ενημέρωση",
+      backupEmpty: "Δεν υπάρχουν ακόμη αντίγραφα ασφαλείας.",
+      backupNowTitle: "Δημιουργία αντιγράφου ασφαλείας τώρα",
+      backupRestoreTitle: "Επαναφορά αυτής της διαμόρφωσης",
+      backupDownloadTitle: "Λήψη αντιγράφου ασφαλείας",
+      backupConfirmRestore: "Πραγματική επαναφορά αυτής της διαμόρφωσης στη συσκευή; Οι τρέχουσες ρυθμίσεις ακροδεκτών/καναλιών και η εντολή εκκίνησης θα αντικατασταθούν.",
+      backupAlertRestoreFailed: "Η επαναφορά απέτυχε: {msg}",
+      backupRestoredAlert: "Η διαμόρφωση επαναφέρθηκε.",
+      backupConfirmDelete: "Πραγματική διαγραφή αυτού του αντιγράφου ασφαλείας;",
+      backupAlertDeleteFailed: "Η διαγραφή απέτυχε: {msg}",
+      backupAlertCreateFailed: "Η δημιουργία αντιγράφου ασφαλείας απέτυχε: {msg}",
+      sensor_reboot_count: "Επανεκκινήσεις (εκτίμηση)",
+      sensor_last_seen: "Τελευταία εμφάνιση",
     },
     hu: {
       checkRelease: "Frissítések keresése",
@@ -2485,6 +2745,26 @@
       notifActiveLabel: "Aktív",
       notifKeepUnchanged: "•••• (hagyd változatlanul, ha meg szeretnéd tartani)",
       notifApikeyPlaceholderExample: "pl. 123456",
+      backupsHeader: "Konfigurációs biztonsági mentések",
+      backupsIntro: "Minden frissítés előtt automatikusan elmenti az eszköz GPIO-tű-/csatorna-hozzárendelését és indítási parancsfájlját, hogy visszavonhass egy olyan frissítést, amely visszaállítja vagy megrongálja a konfigurációját. Alább bármelyik eszközhöz manuálisan is indíthatsz mentést.",
+      backupColDevice: "Eszköz",
+      backupColTime: "Időpont",
+      backupColReason: "Ok",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manuális",
+      backupReasonPreUpdate: "Frissítés előtt",
+      backupEmpty: "Még nincs mentés.",
+      backupNowTitle: "Konfiguráció mentése most",
+      backupRestoreTitle: "Ezen konfiguráció visszaállítása",
+      backupDownloadTitle: "Mentés letöltése",
+      backupConfirmRestore: "Valóban visszaállítod ezt a konfigurációt az eszközön? A jelenlegi tű-/csatornabeállítások és az indítási parancs felülíródnak.",
+      backupAlertRestoreFailed: "A visszaállítás sikertelen: {msg}",
+      backupRestoredAlert: "A konfiguráció visszaállítva.",
+      backupConfirmDelete: "Valóban törlöd ezt a mentést?",
+      backupAlertDeleteFailed: "A törlés sikertelen: {msg}",
+      backupAlertCreateFailed: "A mentés sikertelen: {msg}",
+      sensor_reboot_count: "Újraindítások (becsült)",
+      sensor_last_seen: "Utoljára látva",
     },
     ga: {
       checkRelease: "Seiceáil nuashonruithe",
@@ -2656,6 +2936,26 @@
       notifActiveLabel: "Gníomhach",
       notifKeepUnchanged: "•••• (fág gan athrú chun é a choinneáil)",
       notifApikeyPlaceholderExample: "m.sh. 123456",
+      backupsHeader: "Cúltacaí Cumraíochta",
+      backupsIntro: "Sábhálann sé go huathoibríoch mapáil na bpiontaí/cainéal GPIO agus script na n-orduithe tosaithe roimh gach nuashonrú, ionas gur féidir leat nuashonrú a chuireann an chumraíocht ar ais nó a dhéanann damáiste di a chealú. Is féidir leat cúltaca a dhéanamh de láimh freisin d'aon ghléas thíos.",
+      backupColDevice: "Gléas",
+      backupColTime: "Am",
+      backupColReason: "Cúis",
+      backupColVersion: "Bogearra Dochtain",
+      backupReasonManual: "De láimh",
+      backupReasonPreUpdate: "Roimh nuashonrú",
+      backupEmpty: "Níl aon chúltacaí ann fós.",
+      backupNowTitle: "Déan cúltaca den chumraíocht anois",
+      backupRestoreTitle: "Athchóirigh an chumraíocht seo",
+      backupDownloadTitle: "Íoslódáil an cúltaca",
+      backupConfirmRestore: "An bhfuil tú cinnte gur mian leat an chumraíocht seo a athchóiriú ar an ngléas? Forscríobhfar na socruithe reatha piontaí/cainéal agus an t-ordú tosaithe.",
+      backupAlertRestoreFailed: "Theip ar an athchóiriú: {msg}",
+      backupRestoredAlert: "Cumraíocht athchóirithe.",
+      backupConfirmDelete: "An bhfuil tú cinnte gur mian leat an cúltaca seo a scriosadh?",
+      backupAlertDeleteFailed: "Theip ar an scriosadh: {msg}",
+      backupAlertCreateFailed: "Theip ar an gcúltacú: {msg}",
+      sensor_reboot_count: "Atosuithe (measta)",
+      sensor_last_seen: "Feicthe go deireanach",
     },
     it: {
       checkRelease: "Cerca aggiornamenti",
@@ -2827,6 +3127,26 @@
       notifActiveLabel: "Attivo",
       notifKeepUnchanged: "•••• (lascia invariato per mantenerlo)",
       notifApikeyPlaceholderExample: "ad es. 123456",
+      backupsHeader: "Backup della configurazione",
+      backupsIntro: "Salva automaticamente la mappatura dei pin/canali GPIO e lo script dei comandi di avvio di un dispositivo prima di ogni aggiornamento, così puoi annullare un aggiornamento che ripristina o danneggia la sua configurazione. Puoi anche avviare un backup manualmente per qualsiasi dispositivo qui sotto.",
+      backupColDevice: "Dispositivo",
+      backupColTime: "Data e ora",
+      backupColReason: "Motivo",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manuale",
+      backupReasonPreUpdate: "Prima dell'aggiornamento",
+      backupEmpty: "Nessun backup ancora.",
+      backupNowTitle: "Esegui backup della configurazione ora",
+      backupRestoreTitle: "Ripristina questa configurazione",
+      backupDownloadTitle: "Scarica il backup",
+      backupConfirmRestore: "Ripristinare davvero questa configurazione sul dispositivo? Le impostazioni attuali di pin/canali e il comando di avvio verranno sovrascritti.",
+      backupAlertRestoreFailed: "Ripristino non riuscito: {msg}",
+      backupRestoredAlert: "Configurazione ripristinata.",
+      backupConfirmDelete: "Eliminare davvero questo backup?",
+      backupAlertDeleteFailed: "Eliminazione non riuscita: {msg}",
+      backupAlertCreateFailed: "Backup non riuscito: {msg}",
+      sensor_reboot_count: "Riavvii (stimato)",
+      sensor_last_seen: "Visto l'ultima volta",
     },
     lv: {
       checkRelease: "Pārbaudīt atjauninājumus",
@@ -2998,6 +3318,26 @@
       notifActiveLabel: "Aktīvs",
       notifKeepUnchanged: "•••• (atstājiet nemainītu, lai to saglabātu)",
       notifApikeyPlaceholderExample: "piem., 123456",
+      backupsHeader: "Konfigurācijas dublējumi",
+      backupsIntro: "Pirms katra atjauninājuma automātiski saglabā ierīces GPIO kontaktu/kanālu kartējumu un startēšanas komandu skriptu, lai varētu atsaukt atjauninājumu, kas atiestata vai sabojā tās konfigurāciju. Dublējumu var izveidot arī manuāli jebkurai ierīcei zemāk.",
+      backupColDevice: "Ierīce",
+      backupColTime: "Laiks",
+      backupColReason: "Iemesls",
+      backupColVersion: "Aparātprogrammatūra",
+      backupReasonManual: "Manuāli",
+      backupReasonPreUpdate: "Pirms atjauninājuma",
+      backupEmpty: "Vēl nav dublējumu.",
+      backupNowTitle: "Dublēt konfigurāciju tagad",
+      backupRestoreTitle: "Atjaunot šo konfigurāciju",
+      backupDownloadTitle: "Lejupielādēt dublējumu",
+      backupConfirmRestore: "Vai tiešām atjaunot šo konfigurāciju ierīcē? Pašreizējie kontaktu/kanālu iestatījumi un startēšanas komanda tiks pārrakstīti.",
+      backupAlertRestoreFailed: "Atjaunošana neizdevās: {msg}",
+      backupRestoredAlert: "Konfigurācija atjaunota.",
+      backupConfirmDelete: "Vai tiešām dzēst šo dublējumu?",
+      backupAlertDeleteFailed: "Dzēšana neizdevās: {msg}",
+      backupAlertCreateFailed: "Dublēšana neizdevās: {msg}",
+      sensor_reboot_count: "Pārstartēšanas (aptuveni)",
+      sensor_last_seen: "Pēdējoreiz redzēts",
     },
     lt: {
       checkRelease: "Tikrinti atnaujinimus",
@@ -3169,6 +3509,26 @@
       notifActiveLabel: "Aktyvus",
       notifKeepUnchanged: "•••• (palikite nepakeistą, kad išliktų)",
       notifApikeyPlaceholderExample: "pvz., 123456",
+      backupsHeader: "Konfigūracijos atsarginės kopijos",
+      backupsIntro: "Prieš kiekvieną atnaujinimą automatiškai išsaugo įrenginio GPIO kontaktų/kanalų susiejimą ir paleisties komandų scenarijų, kad galėtum atšaukti atnaujinimą, kuris nustato iš naujo arba sugadina jo konfigūraciją. Atsarginę kopiją taip pat gali sukurti rankiniu būdu bet kuriam įrenginiui žemiau.",
+      backupColDevice: "Įrenginys",
+      backupColTime: "Laikas",
+      backupColReason: "Priežastis",
+      backupColVersion: "Programinė aparatinė įranga",
+      backupReasonManual: "Rankiniu būdu",
+      backupReasonPreUpdate: "Prieš atnaujinimą",
+      backupEmpty: "Atsarginių kopijų dar nėra.",
+      backupNowTitle: "Sukurti konfigūracijos atsarginę kopiją dabar",
+      backupRestoreTitle: "Atkurti šią konfigūraciją",
+      backupDownloadTitle: "Atsisiųsti atsarginę kopiją",
+      backupConfirmRestore: "Ar tikrai atkurti šią konfigūraciją įrenginyje? Dabartiniai kontaktų/kanalų nustatymai ir paleisties komanda bus perrašyti.",
+      backupAlertRestoreFailed: "Atkūrimas nepavyko: {msg}",
+      backupRestoredAlert: "Konfigūracija atkurta.",
+      backupConfirmDelete: "Ar tikrai ištrinti šią atsarginę kopiją?",
+      backupAlertDeleteFailed: "Ištrinti nepavyko: {msg}",
+      backupAlertCreateFailed: "Nepavyko sukurti atsarginės kopijos: {msg}",
+      sensor_reboot_count: "Paleidimai iš naujo (apytiksliai)",
+      sensor_last_seen: "Paskutinį kartą matytas",
     },
     mt: {
       checkRelease: "Iċċekkja l-aġġornamenti",
@@ -3340,6 +3700,26 @@
       notifActiveLabel: "Attiv",
       notifKeepUnchanged: "•••• (ħalliha kif inhi biex iżżommha)",
       notifApikeyPlaceholderExample: "eż. 123456",
+      backupsHeader: "Backups tal-konfigurazzjoni",
+      backupsIntro: "Jissejvja awtomatikament il-mapp tal-pins/channels GPIO u l-iskript tal-kmandi tal-istartjar ta' apparat qabel kull aġġornament, sabiex tkun tista' tħassar aġġornament li jirrisettja jew jagħmel ħsara lill-konfigurazzjoni tiegħu. Tista' wkoll tibda backup manwalment għal kwalunkwe apparat hawn taħt.",
+      backupColDevice: "Apparat",
+      backupColTime: "Ħin",
+      backupColReason: "Raġuni",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manwali",
+      backupReasonPreUpdate: "Qabel l-aġġornament",
+      backupEmpty: "Għadu m'hemm l-ebda backup.",
+      backupNowTitle: "Ibbekkja l-konfigurazzjoni issa",
+      backupRestoreTitle: "Irrestawra din il-konfigurazzjoni",
+      backupDownloadTitle: "Niżżel il-backup",
+      backupConfirmRestore: "Verament tirrestawra din il-konfigurazzjoni fuq l-apparat? L-issettjar attwali tal-pins/channels u l-kmand tal-istartjar se jinkitbu fuqhom.",
+      backupAlertRestoreFailed: "Ir-restawr falla: {msg}",
+      backupRestoredAlert: "Il-konfigurazzjoni ġiet irrestawrata.",
+      backupConfirmDelete: "Verament tħassar dan il-backup?",
+      backupAlertDeleteFailed: "It-tħassir falla: {msg}",
+      backupAlertCreateFailed: "Il-backup falla: {msg}",
+      sensor_reboot_count: "Riavvijamenti (stmat)",
+      sensor_last_seen: "Deher l-aħħar",
     },
     pl: {
       checkRelease: "Sprawdź aktualizacje",
@@ -3511,6 +3891,26 @@
       notifActiveLabel: "Aktywny",
       notifKeepUnchanged: "•••• (pozostaw bez zmian, aby zachować)",
       notifApikeyPlaceholderExample: "np. 123456",
+      backupsHeader: "Kopie zapasowe konfiguracji",
+      backupsIntro: "Automatycznie zapisuje mapowanie pinów/kanałów GPIO oraz skrypt poleceń startowych urządzenia przed każdą aktualizacją, dzięki czemu możesz cofnąć aktualizację, która resetuje lub uszkadza jego konfigurację. Kopię zapasową możesz też utworzyć ręcznie dla dowolnego urządzenia poniżej.",
+      backupColDevice: "Urządzenie",
+      backupColTime: "Czas",
+      backupColReason: "Powód",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Ręcznie",
+      backupReasonPreUpdate: "Przed aktualizacją",
+      backupEmpty: "Brak kopii zapasowych.",
+      backupNowTitle: "Utwórz kopię zapasową konfiguracji teraz",
+      backupRestoreTitle: "Przywróć tę konfigurację",
+      backupDownloadTitle: "Pobierz kopię zapasową",
+      backupConfirmRestore: "Na pewno przywrócić tę konfigurację na urządzeniu? Bieżące ustawienia pinów/kanałów oraz polecenie startowe zostaną nadpisane.",
+      backupAlertRestoreFailed: "Przywracanie nie powiodło się: {msg}",
+      backupRestoredAlert: "Konfiguracja przywrócona.",
+      backupConfirmDelete: "Na pewno usunąć tę kopię zapasową?",
+      backupAlertDeleteFailed: "Usuwanie nie powiodło się: {msg}",
+      backupAlertCreateFailed: "Tworzenie kopii zapasowej nie powiodło się: {msg}",
+      sensor_reboot_count: "Restarty (szacunkowo)",
+      sensor_last_seen: "Ostatnio widziano",
     },
     ro: {
       checkRelease: "Verifică actualizările",
@@ -3682,6 +4082,26 @@
       notifActiveLabel: "Activ",
       notifKeepUnchanged: "•••• (lasă neschimbat pentru a-l păstra)",
       notifApikeyPlaceholderExample: "ex. 123456",
+      backupsHeader: "Copii de siguranță ale configurației",
+      backupsIntro: "Salvează automat maparea pinilor/canalelor GPIO și scriptul de comenzi de pornire ale unui dispozitiv înainte de fiecare actualizare, astfel încât să poți anula o actualizare care resetează sau corupe configurația acestuia. Poți crea o copie de siguranță și manual pentru orice dispozitiv de mai jos.",
+      backupColDevice: "Dispozitiv",
+      backupColTime: "Data și ora",
+      backupColReason: "Motiv",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manual",
+      backupReasonPreUpdate: "Înainte de actualizare",
+      backupEmpty: "Încă nu există copii de siguranță.",
+      backupNowTitle: "Creează copie de siguranță a configurației acum",
+      backupRestoreTitle: "Restaurează această configurație",
+      backupDownloadTitle: "Descarcă copia de siguranță",
+      backupConfirmRestore: "Chiar restaurezi această configurație pe dispozitiv? Setările curente ale pinilor/canalelor și comanda de pornire vor fi suprascrise.",
+      backupAlertRestoreFailed: "Restaurarea a eșuat: {msg}",
+      backupRestoredAlert: "Configurație restaurată.",
+      backupConfirmDelete: "Chiar ștergi această copie de siguranță?",
+      backupAlertDeleteFailed: "Ștergerea a eșuat: {msg}",
+      backupAlertCreateFailed: "Crearea copiei de siguranță a eșuat: {msg}",
+      sensor_reboot_count: "Reporniri (estimat)",
+      sensor_last_seen: "Ultima dată văzut",
     },
     sk: {
       checkRelease: "Skontrolovať aktualizácie",
@@ -3853,6 +4273,26 @@
       notifActiveLabel: "Aktívny",
       notifKeepUnchanged: "•••• (nechajte bez zmeny, ak ho chcete zachovať)",
       notifApikeyPlaceholderExample: "napr. 123456",
+      backupsHeader: "Zálohy konfigurácie",
+      backupsIntro: "Pred každou aktualizáciou automaticky uloží mapovanie GPIO pinov/kanálov a skript spúšťacích príkazov zariadenia, aby ste mohli vrátiť späť aktualizáciu, ktorá resetuje alebo poškodí jeho konfiguráciu. Zálohu môžete kedykoľvek spustiť aj ručne pre ľubovoľné zariadenie nižšie.",
+      backupColDevice: "Zariadenie",
+      backupColTime: "Čas",
+      backupColReason: "Dôvod",
+      backupColVersion: "Firmvér",
+      backupReasonManual: "Ručne",
+      backupReasonPreUpdate: "Pred aktualizáciou",
+      backupEmpty: "Zatiaľ žiadne zálohy.",
+      backupNowTitle: "Zálohovať konfiguráciu teraz",
+      backupRestoreTitle: "Obnoviť túto konfiguráciu",
+      backupDownloadTitle: "Stiahnuť zálohu",
+      backupConfirmRestore: "Naozaj obnoviť túto konfiguráciu na zariadení? Aktuálne nastavenia pinov/kanálov a spúšťací príkaz budú prepísané.",
+      backupAlertRestoreFailed: "Obnovenie zlyhalo: {msg}",
+      backupRestoredAlert: "Konfigurácia bola obnovená.",
+      backupConfirmDelete: "Naozaj odstrániť túto zálohu?",
+      backupAlertDeleteFailed: "Odstránenie zlyhalo: {msg}",
+      backupAlertCreateFailed: "Zálohovanie zlyhalo: {msg}",
+      sensor_reboot_count: "Reštarty (odhad)",
+      sensor_last_seen: "Naposledy videný",
     },
     sl: {
       checkRelease: "Preveri posodobitve",
@@ -4024,6 +4464,26 @@
       notifActiveLabel: "Aktivno",
       notifKeepUnchanged: "•••• (pustite nespremenjeno, da ga obdržite)",
       notifApikeyPlaceholderExample: "npr. 123456",
+      backupsHeader: "Varnostne kopije konfiguracije",
+      backupsIntro: "Pred vsako posodobitvijo samodejno shrani preslikavo GPIO nožic/kanalov in skript zagonskih ukazov naprave, da lahko razveljaviš posodobitev, ki ponastavi ali poškoduje njeno konfiguracijo. Varnostno kopijo lahko spodaj kadar koli ustvariš tudi ročno za katero koli napravo.",
+      backupColDevice: "Naprava",
+      backupColTime: "Čas",
+      backupColReason: "Razlog",
+      backupColVersion: "Vdelana programska oprema",
+      backupReasonManual: "Ročno",
+      backupReasonPreUpdate: "Pred posodobitvijo",
+      backupEmpty: "Še ni varnostnih kopij.",
+      backupNowTitle: "Ustvari varnostno kopijo konfiguracije zdaj",
+      backupRestoreTitle: "Obnovi to konfiguracijo",
+      backupDownloadTitle: "Prenesi varnostno kopijo",
+      backupConfirmRestore: "Ali res želite obnoviti to konfiguracijo na napravi? Trenutne nastavitve nožic/kanalov in zagonski ukaz bodo prepisani.",
+      backupAlertRestoreFailed: "Obnovitev ni uspela: {msg}",
+      backupRestoredAlert: "Konfiguracija je bila obnovljena.",
+      backupConfirmDelete: "Ali res želite izbrisati to varnostno kopijo?",
+      backupAlertDeleteFailed: "Brisanje ni uspelo: {msg}",
+      backupAlertCreateFailed: "Ustvarjanje varnostne kopije ni uspelo: {msg}",
+      sensor_reboot_count: "Ponovni zagoni (ocenjeno)",
+      sensor_last_seen: "Nazadnje viden",
     },
     sv: {
       checkRelease: "Sök efter uppdateringar",
@@ -4195,6 +4655,26 @@
       notifActiveLabel: "Aktiv",
       notifKeepUnchanged: "•••• (lämna oförändrat för att behålla det)",
       notifApikeyPlaceholderExample: "t.ex. 123456",
+      backupsHeader: "Konfigurationssäkerhetskopior",
+      backupsIntro: "Sparar automatiskt enhetens GPIO-pin-/kanaltilldelning och startkommandoskript före varje uppdatering, så att du kan ångra en uppdatering som återställer eller skadar dess konfiguration. Du kan även skapa en säkerhetskopia manuellt för valfri enhet nedan.",
+      backupColDevice: "Enhet",
+      backupColTime: "Tidpunkt",
+      backupColReason: "Anledning",
+      backupColVersion: "Firmware",
+      backupReasonManual: "Manuellt",
+      backupReasonPreUpdate: "Före uppdatering",
+      backupEmpty: "Inga säkerhetskopior än.",
+      backupNowTitle: "Säkerhetskopiera konfiguration nu",
+      backupRestoreTitle: "Återställ denna konfiguration",
+      backupDownloadTitle: "Ladda ner säkerhetskopia",
+      backupConfirmRestore: "Vill du verkligen återställa denna konfiguration på enheten? De aktuella pin-/kanalinställningarna och startkommandot skrivs över.",
+      backupAlertRestoreFailed: "Återställningen misslyckades: {msg}",
+      backupRestoredAlert: "Konfigurationen har återställts.",
+      backupConfirmDelete: "Vill du verkligen ta bort denna säkerhetskopia?",
+      backupAlertDeleteFailed: "Borttagningen misslyckades: {msg}",
+      backupAlertCreateFailed: "Säkerhetskopieringen misslyckades: {msg}",
+      sensor_reboot_count: "Omstarter (uppskattat)",
+      sensor_last_seen: "Senast sedd",
     },
   };
   I18N["en-US"] = I18N.en; // identical strings; only the date locale differs (see DATE_LOCALES)
@@ -4262,6 +4742,7 @@
       updateBanner(lastDevices);
       loadSettings();
       loadCache();
+      loadBackups();
       loadRelease();
       loadChannels().catch(() => {});
       if (typeof renderNewChannelFields === "function" && !newChannelForm.hidden) renderNewChannelFields();
@@ -4281,7 +4762,7 @@
   // stays the way the user left it across reloads.
 
   const PANEL_STATE_KEY = "obk_panel_state";
-  const PANEL_DEFAULTS = { devices: true, notifications: false, settings: false, cache: false };
+  const PANEL_DEFAULTS = { devices: true, notifications: false, settings: false, cache: false, backups: false };
 
   function getPanelState() {
     let stored = {};
@@ -4403,6 +4884,8 @@
   const ICON_SYNC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>`;
   const ICON_TRASH = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>`;
   const ICON_OPEN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`;
+  const ICON_SAVE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>`;
+  const ICON_DOWNLOAD = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
 
   function statusPill(dev) {
     if (dev.update_state === "updating") return `<span class="status-pill status-update">${t("statusUpdating")}</span>`;
@@ -4455,6 +4938,7 @@
           <td class="row-actions no-detail">
             <button class="icon-btn icon-btn-sync btn-refresh" data-id="${dev.id}" title="${escapeAttr(t("refreshTitle"))}">${ICON_SYNC}</button>
             <button class="btn btn-primary btn-update" data-id="${dev.id}" title="${escapeAttr(updateTitle)}" ${canUpdate ? "" : "disabled"}>${t("updateBtnLabel")}</button>
+            <button class="icon-btn icon-btn-save btn-backup-now" data-id="${dev.id}" title="${escapeAttr(t("backupNowTitle"))}">${ICON_SAVE}</button>
             <button class="icon-btn icon-btn-delete btn-delete" data-id="${dev.id}" title="${escapeAttr(t("deleteTitle"))}">${ICON_TRASH}</button>
             <button class="icon-btn icon-btn-open btn-open-device" data-ip="${escapeAttr(dev.ip)}" title="${escapeAttr(t("openDeviceTitle"))}">${ICON_OPEN}</button>
           </td>
@@ -4550,6 +5034,37 @@
     renderCache(data);
   }
 
+  const BACKUP_REASON_LABEL_KEY = { manual: "backupReasonManual", pre_update: "backupReasonPreUpdate" };
+
+  function renderBackups(data) {
+    const rows = $("#backup-rows");
+    const entries = data.entries || [];
+    if (!entries.length) {
+      rows.innerHTML = `<tr><td colspan="5" class="empty-row" data-i18n="backupEmpty">${escapeHtml(t("backupEmpty"))}</td></tr>`;
+      return;
+    }
+    // Newest first for readability.
+    const sorted = [...entries].sort((a, b) => b.created_at - a.created_at);
+    rows.innerHTML = sorted.map((e) => `
+      <tr>
+        <td>${escapeHtml(e.device_name || e.ip || "?")}</td>
+        <td>${escapeHtml(fmtDate(e.created_at))}</td>
+        <td>${escapeHtml(t(BACKUP_REASON_LABEL_KEY[e.reason] || e.reason))}</td>
+        <td>${escapeHtml(e.version || "?")}</td>
+        <td class="row-actions">
+          <button class="icon-btn icon-btn-sync btn-backup-restore" data-device-id="${escapeAttr(e.device_id)}" data-id="${escapeAttr(e.id)}" title="${escapeAttr(t("backupRestoreTitle"))}">${ICON_SYNC}</button>
+          <button class="icon-btn btn-backup-download" data-device-id="${escapeAttr(e.device_id)}" data-id="${escapeAttr(e.id)}" title="${escapeAttr(t("backupDownloadTitle"))}">${ICON_DOWNLOAD}</button>
+          <button class="icon-btn icon-btn-delete btn-backup-delete" data-device-id="${escapeAttr(e.device_id)}" data-id="${escapeAttr(e.id)}" title="${escapeAttr(t("deleteTitle"))}">${ICON_TRASH}</button>
+        </td>
+      </tr>
+    `).join("");
+  }
+
+  async function loadBackups() {
+    const data = await api("GET", "api/backups");
+    renderBackups(data);
+  }
+
   async function refreshAll() {
     await Promise.all([loadDevices(), loadRelease()]);
   }
@@ -4579,6 +5094,41 @@
     } catch (e) {
       alert(t("cacheAlertDeleteFailed", { msg: e.message }));
       btn.disabled = false;
+    }
+  });
+
+  $("#backup-rows").addEventListener("click", async (ev) => {
+    const btn = ev.target.closest("button");
+    if (!btn) return;
+    const deviceId = btn.dataset.deviceId;
+    const backupId = btn.dataset.id;
+    if (btn.classList.contains("btn-backup-download")) {
+      window.open(apiUrl(`api/backups/${deviceId}/${backupId}/download`), "_blank", "noopener");
+      return;
+    }
+    if (btn.classList.contains("btn-backup-restore")) {
+      if (!confirm(t("backupConfirmRestore"))) return;
+      btn.disabled = true;
+      try {
+        await api("POST", `api/backups/${deviceId}/${backupId}/restore`);
+        alert(t("backupRestoredAlert"));
+      } catch (e) {
+        alert(t("backupAlertRestoreFailed", { msg: e.message }));
+      } finally {
+        btn.disabled = false;
+      }
+      return;
+    }
+    if (btn.classList.contains("btn-backup-delete")) {
+      if (!confirm(t("backupConfirmDelete"))) return;
+      btn.disabled = true;
+      try {
+        await api("POST", `api/backups/${deviceId}/${backupId}/delete`);
+        await loadBackups();
+      } catch (e) {
+        alert(t("backupAlertDeleteFailed", { msg: e.message }));
+        btn.disabled = false;
+      }
     }
   });
 
@@ -4673,6 +5223,18 @@
       const id = btn.dataset.id;
       if (btn.classList.contains("btn-open-device")) {
         window.open(`http://${btn.dataset.ip}/`, "_blank", "noopener");
+        return;
+      }
+      if (btn.classList.contains("btn-backup-now")) {
+        btn.disabled = true;
+        try {
+          await api("POST", `api/devices/${id}/backups`);
+          await loadBackups();
+        } catch (e) {
+          alert(t("backupAlertCreateFailed", { msg: e.message }));
+        } finally {
+          btn.disabled = false;
+        }
         return;
       }
       try {
@@ -4798,10 +5360,11 @@
     const unit = sensor.unit ? `<span class="sensor-unit">${escapeHtml(sensor.unit)}</span>` : "";
     const valueClass = key === "rssi" ? ` ${rssiColorClass(sensor.value)}` : "";
     const label = sensorLabelFor(key, sensor);
+    const displayValue = sensor.is_timestamp ? fmtDate(sensor.value) : fmtSensorValue(sensor.value);
     return `
       <div class="sensor-card" data-key="${escapeAttr(key)}">
         <div class="sensor-label" data-key="${escapeAttr(key)}" title="${escapeAttr(t("renameSensorPrompt"))}">${escapeHtml(label)}</div>
-        <div class="sensor-value${valueClass}">${escapeHtml(fmtSensorValue(sensor.value))}${unit}</div>
+        <div class="sensor-value${valueClass}">${escapeHtml(displayValue)}${unit}</div>
       </div>`;
   }
 
@@ -5205,6 +5768,7 @@
   refreshAll();
   loadSettings();
   loadCache();
+  loadBackups();
   loadChannels();
   setInterval(loadDevices, 10000);
 })();

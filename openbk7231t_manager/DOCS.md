@@ -2,6 +2,44 @@
 
 > Eine kompakte Versionsübersicht gibt es auch in [CHANGELOG.md](CHANGELOG.md).
 
+## Änderungen in 1.7.1
+
+- **Diagnose-Erweiterung im Geräte-Popup**: Die "Diagnose"-Karten im
+  Detail-Popup eines Geräts (das sich beim Klick auf einen Gerätenamen
+  öffnet) zeigen jetzt zusätzlich "Zuletzt gesehen" (Zeitpunkt der letzten
+  erfolgreichen Abfrage durch das Add-on) und "Neustarts (geschätzt)" an.
+  Da die OpenBK7231T_App-Firmware selbst keine Neustart-Anzahl mitführt,
+  wird diese näherungsweise ermittelt: Immer wenn die vom Gerät gemeldete
+  Laufzeit (Uptime) gegenüber der letzten Prüfung gesunken ist, muss
+  zwischenzeitlich ein Neustart stattgefunden haben, und der Zähler wird
+  erhöht. Das kann nur Neustarts erkennen, die zwischen zwei Prüfungen des
+  Add-ons liegen - mehrere Neustarts innerhalb eines einzigen
+  Prüfintervalls werden als einer gezählt. Die Zahl ist also eine
+  Unter­grenze, kein exakter Wert.
+
+## Änderungen in 1.7.0
+
+- **Konfigurations-Backups**: Neuer Bereich "Konfigurations-Backups" auf
+  der Hauptseite. Vor jedem Firmware-Update sichert das Add-on jetzt
+  automatisch die GPIO-Pin-/Kanal-Zuordnung und das Startbefehl-Skript
+  ("Autoexec"-Skript) des Geräts. Setzt oder beschädigt ein Update also
+  die Konfiguration, lässt sich das einfach rückgängig machen.
+  - Über das neue Speichern-Symbol in der Geräteliste (oder direkt im
+    Backup-Bereich) lässt sich außerdem jederzeit manuell ein Backup
+    auslösen.
+  - Pro Gerät werden die letzten 20 Backups aufbewahrt, ältere werden
+    automatisch gelöscht.
+  - Jedes Backup lässt sich mit einem Klick auf das Gerät zurückspielen,
+    als JSON-Datei herunterladen oder löschen.
+  - Schlägt eine Sicherung fehl (z. B. weil das Gerät gerade nicht
+    erreichbar ist), wird das Update dadurch nicht blockiert oder
+    abgebrochen - die Sicherung ist ein reines Sicherheitsnetz und läuft
+    im Hintergrund mit.
+  - Technischer Hintergrund: Genutzt werden dieselben REST-Endpunkte
+    (`GET`/`POST /api/pins`), die auch die "Pins"-Konfigurationsseite der
+    Firmware selbst verwendet - es ist also keine besondere
+    Firmware-Version oder Zusatzfunktion nötig.
+
 ## Änderungen in 1.6.0
 
 - **Einklappbare Bereiche**: Die Überschriften der Bereiche "Geräte",
